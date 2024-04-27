@@ -28,3 +28,5 @@ if sys.implementation.name == "cpython":
             _get_py_files(),
         ),
     )
+else:
+    setup()
