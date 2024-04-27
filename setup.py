@@ -2,6 +2,7 @@
 """Setup script."""
 from __future__ import annotations
 
+import sys
 from pathlib import Path
 from typing import Final
 
@@ -21,8 +22,9 @@ def _get_py_files(path: Path = _PACKAGE_ROOT) -> list[str]:
     return py_files
 
 
-setup(
-    ext_modules=mypycify(
-        _get_py_files(),
-    ),
-)
+if sys.implementation.name == "cpython":
+    setup(
+        ext_modules=mypycify(
+            _get_py_files(),
+        ),
+    )
