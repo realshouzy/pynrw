@@ -25,7 +25,17 @@ def test_linear_search() -> None:
     assert not lst.has_access
 
 
-def test_depth_first_search() -> None:
+def test_depth_first_search_on_empty_graph() -> None:
+    assert depth_first_search(Graph(), Vertex("A")).is_empty
+
+
+def test_depth_first_search_when_vertex_not_in_given_graph() -> None:
+    graph: Graph = Graph()
+    graph.add_vertex(Vertex("A"))
+    assert depth_first_search(graph, Vertex("B")).is_empty
+
+
+def test_depth_first_search_on_non_empty_graph() -> None:
     graph: Graph = Graph()
     vertex1: Vertex = Vertex("A")
     graph.add_vertex(vertex1)
@@ -48,7 +58,17 @@ def test_depth_first_search() -> None:
         result.next()
 
 
-def test_breadth_first_search() -> None:
+def test_breadth_first_search_on_empty_graph() -> None:
+    assert breadth_first_search(Graph(), Vertex("A")).is_empty
+
+
+def test_breadth_first_search_when_vertex_not_in_given_graph() -> None:
+    graph: Graph = Graph()
+    graph.add_vertex(Vertex("A"))
+    assert breadth_first_search(graph, Vertex("B")).is_empty
+
+
+def test_breadth_first_search_on_non_empty_graph() -> None:
     graph: Graph = Graph()
     vertex1: Vertex = Vertex("A")
     graph.add_vertex(vertex1)
