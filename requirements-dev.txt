@@ -1,0 +1,13 @@
+.
+bandit
+black
+covdefaults
+coverage
+isort
+mypy
+pre-commit
+pylint
+pylint-pytest
+pytest
+ruff
+tox
