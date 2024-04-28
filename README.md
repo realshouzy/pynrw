@@ -15,13 +15,11 @@
 
 This package implements the datastructures given by the German state NRW in Python, thus futher documentation will be in German. This code is purely intended for educational purposes and should not be used in production!
 
-## Dokumentation
-
-### Zu beachten
-
 **Dieses Package dient alleine zu Bildungszwecken und sollte nicht in Produktion genutzt werden!**
 
-Dieses Package implementiert die Datenstrukturen nach den Angaben des Landes NRW in Python, zu finden in [`nrw.datastructures`](/nrw/datastructures/), d.s.:
+## Dokumentation
+
+Dieses Package implementiert die Datenstrukturen nach den Vorgaben des Landes NRW in Python, zu finden in [`nrw.datastructures`](/nrw/datastructures/), d.s.:
 
 - [`List`](/nrw/datastructures/_list.py)
 - [`Stack`](/nrw/datastructures/_stack.py)
@@ -32,7 +30,7 @@ Dieses Package implementiert die Datenstrukturen nach den Angaben des Landes NRW
 - [`Edge`](/nrw/datastructures/_edge.py)
 - [`Graph`](/nrw/datastructures/_graph.py)
 
-Die Implementation ist semantisch identisch mit dem einzigen Unterschied, dass alles mehr *pythonic* ist, d.h. die Benennung der Methoden folgt [`pep8`](https://peps.python.org/pep-0008/), `Getter` und `Setter` sind, wo es sinnvoll ist, in [`properties`](https://docs.python.org/3/library/functions.html#property) transformiert worden und die Dokumentation (*doc strings*) sind ebenfalls angepasst worden.
+Die Implementation ist semantisch identisch zu der Implementation des Landes mit dem einzigen Unterschied, dass alles mehr *pythonic* ist, d.h. die Benennung der Methoden folgt [`pep8`](https://peps.python.org/pep-0008/), `Getter` und `Setter` sind, wo es sinnvoll ist, in [`properties`](https://docs.python.org/3/library/functions.html#property) transformiert und die Dokumentation (*doc strings*) sind ebenfalls angepasst worden.
 Außerdem sind (triviale) Optimierungen vorgenommen worden:
 
 - der Python Quellcode wird zu [`C extensions`](https://docs.python.org/3/extending/extending.html) compiliert (nur untersützt für `CPython`)
@@ -55,7 +53,7 @@ Zusätzlich enthält dieses Package hilfreiche Funktionen zum Sortieren, Suchen 
 - [`postorder`](/nrw/algorithms/_traversal.py)
 - [`levelorder`](/nrw/algorithms/_traversal.py)
 
-Allerdings muss annotiert werden, dass aufgrund den Natur der Datastrukturen, wie sie vom Land vorgegeben werden, die Laufzeit nicht optimal ist. Zudem kann es zu ungewollten Nebeneffekte für die Argumente kommen. Welche dies sind wird dem Leser als Übgung überlassen.
+Allerdings muss annotiert werden, dass aufgrund den Natur der Datastrukturen, wie sie vom Land vorgegeben werden, die Laufzeiten nicht optimal sind. Zudem kann es zu ungewollten Nebeneffekte für die Argumente kommen. Welche dies sind wird dem Leser als Übgung überlassen. Es soll nicht vor einem Blick in den Quellcode zurückgeschreckt werden.
 
 Für Hilfe zum jeweiligen Objekt (gilt für alle oben genannte Objekte):
 
@@ -97,13 +95,13 @@ print(sorted_lst.content) # 0
 
 ## Motivation
 
-Vereinfacht: `Java`, als Programmiersprache in der Bildung, ist eine schlechte Wahl, da ...
+Vereinfacht: Java, als Programmiersprache in der Bildung, ist eine schlechte Wahl, da ...
 
-- `Java` veraltet ist.
+- Java veraltet ist.
 - das rein objekt-orientierte Paradigma schlechthin unbrauchbar ist.
 - die Syntax und und die statische Typisierung für Anfänger einschränkend sein können.
 
-Diese Probleme und Hürden werden größtenteils in `Python` überwunden. Allerdings ist Python
+Diese Probleme und Hürden werden größtenteils in Python überwunden. Allerdings ist Python auch nicht ideal.
 
 ## Unterstützung
 
