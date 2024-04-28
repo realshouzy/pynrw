@@ -11,6 +11,7 @@ _T = TypeVar("_T")
 
 class _QueueNode(Generic[_T]):
     __slots__: Final[tuple[str, str]] = ("_content", "_next_node")
+    __hash__ = None  # type: ignore[assignment]
 
     def __init__(self, content: _T) -> None:
         """Ein neues Objekt vom Typ `_QueueNode[_T]` wird erschaffen.
@@ -42,6 +43,7 @@ class Queue(Generic[_T]):
     """
 
     __slots__: Final[tuple[str, str]] = ("_head", "_tail")
+    __hash__ = None  # type: ignore[assignment]
 
     def __init__(self) -> None:
         """Eine leere Schlange wird erzeugt."""

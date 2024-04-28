@@ -8,6 +8,10 @@ from nrw.datastructures._edge import Edge
 from nrw.datastructures._vertex import Vertex
 
 
+def test_edge_is_unhashable() -> None:
+    assert Edge.__hash__ is None
+
+
 def test_edge_construction_and_getters() -> None:
     vertex_b: Vertex = Vertex("A")
     vertex_a: Vertex = Vertex("B")

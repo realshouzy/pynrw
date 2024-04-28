@@ -14,6 +14,7 @@ class _BSTNode(Generic[ComparableContentT]):
     """
 
     __slots__: Final[tuple[str, str, str]] = ("_content", "_left", "_right")
+    __hash__ = None  # type: ignore[assignment]
 
     def __init__(self, content: ComparableContentT) -> None:
         self._content: ComparableContentT = content
@@ -45,6 +46,7 @@ class BinarySearchTree(Generic[ComparableContentT]):
     """
 
     __slots__: Final[tuple[str]] = ("_node",)
+    __hash__ = None  # type: ignore[assignment]
 
     def __init__(self) -> None:
         """Der Konstruktor erzeugt einen leeren Suchbaum."""

@@ -11,6 +11,10 @@ def test_slots_of_btnode() -> None:
     assert _BTNode.__slots__ == ("_content", "_left", "_right")
 
 
+def test_btnode_is_unhashable() -> None:
+    assert _BTNode.__hash__ is None
+
+
 def test_btnode() -> None:
     node: _BTNode[int] = _BTNode(42)
 
@@ -29,6 +33,10 @@ def test_btnode() -> None:
 
 def test_slots_of_binary_tree() -> None:
     assert BinaryTree.__slots__ == ("_node",)
+
+
+def test_binary_tree_is_unhashable() -> None:
+    assert BinaryTree.__hash__ is None
 
 
 def test_binary_tree_construction_with_no_params_and_getters() -> None:

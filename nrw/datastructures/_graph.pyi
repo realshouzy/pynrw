@@ -8,6 +8,7 @@ from nrw.datastructures._vertex import Vertex
 
 class Graph:
     __slots__: Final[tuple[str, str]] = ("_vertices", "_edges")
+    __hash__ = None  # type: ignore[assignment]
 
     def __init__(self) -> None: ...
     @property

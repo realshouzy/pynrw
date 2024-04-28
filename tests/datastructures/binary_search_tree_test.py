@@ -25,6 +25,10 @@ def test_bstnode_slots() -> None:
     assert _BSTNode.__slots__ == ("_content", "_left", "_right")
 
 
+def test_bstnode_is_unhashable() -> None:
+    assert _BSTNode.__hash__ is None
+
+
 def test_bstnode_construction() -> None:
     node: _BSTNode[int] = _BSTNode(1)
 
@@ -39,6 +43,10 @@ def test_bstnode_construction() -> None:
 
 def test_bst_slots() -> None:
     assert BinarySearchTree.__slots__ == ("_node",)
+
+
+def test_bst_is_unhashable() -> None:
+    assert BinarySearchTree.__hash__ is None
 
 
 def test_bst_construction(empty_bst: BinarySearchTree[int]) -> None:

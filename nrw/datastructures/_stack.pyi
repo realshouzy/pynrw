@@ -6,6 +6,7 @@ _T = TypeVar("_T")
 
 class Stack(Generic[_T]):
     __slots__: Final[tuple[str]] = ("_head",)
+    __hash__ = None  # type: ignore[assignment]
 
     def __init__(self) -> None: ...
     @property

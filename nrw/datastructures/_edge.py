@@ -19,6 +19,7 @@ class Edge:
     """
 
     __slots__: Final[tuple[str, str, str]] = ("_vertices", "_weight", "_mark")
+    __hash__ = None  # type: ignore[assignment]
 
     def __init__(self, vertex: Vertex, another_vertex: Vertex, weight: int) -> None:
         """Ein neues Objekt vom Typ `Edge` wird erstellt. Die von diesem Objekt

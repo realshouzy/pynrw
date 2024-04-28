@@ -11,6 +11,7 @@ _T = TypeVar("_T")
 
 class _ListNode(Generic[_T]):
     __slots__: Final[tuple[str, str]] = ("_content", "_next_node")
+    __hash__ = None  # type: ignore[assignment]
 
     def __init__(self, content: _T) -> None:
         """Ein neues Objekt vom Typ `_ListNode[_T]` wird erschaffen.
@@ -54,6 +55,7 @@ class List(Generic[_T]):
     """
 
     __slots__: Final[tuple[str, str, str]] = ("_first", "_last", "_current")
+    __hash__ = None  # type: ignore[assignment]
 
     def __init__(self) -> None:
         """Eine leere Liste wird erzeugt."""

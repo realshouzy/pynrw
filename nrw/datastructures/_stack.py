@@ -11,6 +11,7 @@ _T = TypeVar("_T")
 
 class _StackNode(Generic[_T]):
     __slots__: Final[tuple[str, str]] = ("_content", "_next_node")
+    __hash__ = None  # type: ignore[assignment]
 
     def __init__(self, content: _T) -> None:
         """Ein neues Objekt vom Typ `_StackNode[_T]` wird erschaffen.
@@ -43,6 +44,7 @@ class Stack(Generic[_T]):
     """
 
     __slots__: Final[tuple[str]] = ("_head",)
+    __hash__ = None  # type: ignore[assignment]
 
     def __init__(self) -> None:
         """Ein leerer Stapel wird erzeugt."""

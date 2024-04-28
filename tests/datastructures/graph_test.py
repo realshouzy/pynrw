@@ -23,6 +23,10 @@ def test_graph_slots() -> None:
     assert Graph.__slots__ == ("_vertices", "_edges")
 
 
+def test_graph_is_unhashable() -> None:
+    assert Graph.__hash__ is None
+
+
 def test_graph_construction(graph: Graph) -> None:
     assert graph._vertices.is_empty
     assert graph._edges.is_empty

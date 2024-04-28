@@ -6,6 +6,7 @@ _T = TypeVar("_T")
 
 class BinaryTree(Generic[_T]):
     __slots__: Final[tuple[str]] = ("_node",)
+    __hash__ = None  # type: ignore[assignment]
 
     @overload
     def __init__(self) -> None: ...

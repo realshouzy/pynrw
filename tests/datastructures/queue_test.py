@@ -11,6 +11,10 @@ def test_slots_of_queue_node() -> None:
     assert _QueueNode.__slots__ == ("_content", "_next_node")
 
 
+def test_queue_node_is_unhashable() -> None:
+    assert _QueueNode.__hash__ is None
+
+
 def test_queue_node_creation_and_content() -> None:
     content: str = "test"
     node: _QueueNode[str] = _QueueNode(content)
@@ -29,6 +33,10 @@ def test_queue_node_next_node() -> None:
 
 def test_slots_of_queue() -> None:
     assert Queue.__slots__ == ("_head", "_tail")
+
+
+def test_queue_is_unhashable() -> None:
+    assert Queue.__hash__ is None
 
 
 def test_is_empty_on_empty_queue() -> None:

@@ -6,6 +6,7 @@ _T = TypeVar("_T")
 
 class List(Generic[_T]):
     __slots__: Final[tuple[str, str, str]] = ("_first", "_last", "_current")
+    __hash__ = None  # type: ignore[assignment]
 
     def __init__(self) -> None: ...
     @property

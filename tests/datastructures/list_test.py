@@ -30,6 +30,10 @@ def test_slots_of_list_node() -> None:
     assert _ListNode.__slots__ == ("_content", "_next_node")
 
 
+def test_list_node_is_unhashable() -> None:
+    assert _ListNode.__hash__ is None
+
+
 def test_list_node_creation_and_properties(sample_node: _ListNode[int]) -> None:
     assert sample_node.content == 1
     assert sample_node.next_node is None
@@ -52,6 +56,10 @@ def test_list_node_next_node_setter(sample_node: _ListNode[int]) -> None:
 
 def test_slots_of_list() -> None:
     assert List.__slots__ == ("_first", "_last", "_current")
+
+
+def test_list_is_unhashable() -> None:
+    assert List.__hash__ is None
 
 
 def test_is_empty_on_empty_list(empty_list: List[int]) -> None:

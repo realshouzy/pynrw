@@ -16,6 +16,7 @@ class _BTNode(Generic[_T]):
     """
 
     __slots__: Final[tuple[str, str, str]] = ("_content", "_left", "_right")
+    __hash__ = None  # type: ignore[assignment]
 
     def __init__(self, content: _T) -> None:
         self._content: _T = content
@@ -32,6 +33,7 @@ class BinaryTree(Generic[_T]):
     """
 
     __slots__: Final[tuple[str]] = ("_node",)
+    __hash__ = None  # type: ignore[assignment]
 
     def __init__(
         self,

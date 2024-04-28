@@ -11,6 +11,10 @@ def test_slots_of_stack_node() -> None:
     assert _StackNode.__slots__ == ("_content", "_next_node")
 
 
+def test_stack_node_is_unhashable() -> None:
+    assert _StackNode.__hash__ is None
+
+
 def test_queue_node_creation_and_content() -> None:
     content: str = "test"
     node: _StackNode[str] = _StackNode(content)
@@ -29,6 +33,10 @@ def test_queue_node_next_node() -> None:
 
 def test_slots_of_stack() -> None:
     assert Stack.__slots__ == ("_head",)
+
+
+def test_stack_is_unhashable() -> None:
+    assert Stack.__hash__ is None
 
 
 def test_is_empty_on_empty_stack() -> None:

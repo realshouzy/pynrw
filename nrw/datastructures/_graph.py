@@ -27,6 +27,7 @@ class Graph:
     """
 
     __slots__: Final[tuple[str, str]] = ("_vertices", "_edges")
+    __hash__ = None  # type: ignore[assignment]
 
     def __init__(self) -> None:
         """Ein Objekt vom Typ `Graph` wird erstellt.
