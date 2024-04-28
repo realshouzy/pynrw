@@ -35,7 +35,6 @@ Das Interface `ComparableContent` ist ein gleichnamiges [`Protocol`](https://doc
 
 Außerdem sind (triviale) Optimierungen vorgenommen worden:
 
-- der Python Quellcode wird mit [`mypyc`](https://github.com/mypyc/mypyc) zu [`C extensions`](https://docs.python.org/3/extending/extending.html) compiliert (nur untersützt für `CPython`)
 - Verwendung von [`__slots__`](https://docs.python.org/3/reference/datamodel.html#slots)
 - redundante Aufrufe werden weggelassen
 - interne Optimierungen bei Zuweisungen
