@@ -16,7 +16,7 @@ __all__: Final[tuple[str, ...]] = (
 
 from typing import Final
 
-from nrw.algorithms._seraching import (
+from nrw.algorithms._searching import (
     breadth_first_search,
     depth_first_search,
     linear_search,

@@ -6,7 +6,7 @@ from typing import Iterator
 
 import pytest
 
-from nrw.algorithms._seraching import (
+from nrw.algorithms._searching import (
     breadth_first_search,
     depth_first_search,
     linear_search,
