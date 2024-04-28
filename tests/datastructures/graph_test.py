@@ -268,12 +268,12 @@ def test_remove_edge_when_edge_in_graph(graph: Graph) -> None:
     edge2: Edge = Edge(vertex1, vertex3, 1)
     graph.add_edge(edge2)
 
-    assert graph.get_edge(vertex1, vertex2) is edge1
+    assert graph.get_edge(vertex1, vertex3) is edge2
 
-    graph.remove_edge(edge1)
-    assert graph.get_edge(vertex1, vertex2) is None
+    graph.remove_edge(edge2)
+    assert graph.get_edge(vertex1, vertex3) is None
     assert graph.get_vertex("A") is vertex1
-    assert graph.get_vertex("B") is vertex2
+    assert graph.get_vertex("C") is vertex3
 
 
 def test_dont_remove_edge_when_edge_is_not_in_graph(graph: Graph) -> None:
@@ -376,7 +376,7 @@ def test_get_neighbours(graph: Graph) -> None:
     neighbours_of_vertex1.to_first()
     while neighbours_of_vertex1.has_access:
         assert neighbours_of_vertex1.content is not vertex1
-        assert neighbours_of_vertex1.content in {vertex2, vertex3}
+        assert neighbours_of_vertex1.content in (vertex2, vertex3)
         neighbours_of_vertex1.next()
 
 
@@ -399,7 +399,7 @@ def test_get_edges(graph: Graph) -> None:
     edges_of_vertex1.to_first()
     while edges_of_vertex1.has_access:
         assert edges_of_vertex1.content is not edge3
-        assert edges_of_vertex1.content in {edge1, edge2}
+        assert edges_of_vertex1.content in (edge1, edge2)
         edges_of_vertex1.next()
 
 
