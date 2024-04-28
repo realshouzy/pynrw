@@ -31,13 +31,16 @@ Dieses Package implementiert die Datenstrukturen nach den Vorgaben des Landes NR
 - [`Graph`](/nrw/datastructures/_graph.py)
 
 Die Implementation ist semantisch identisch zu der Implementation des Landes mit dem einzigen Unterschied, dass alles mehr *pythonic* ist, d.h. die Benennung der Methoden folgt [`pep8`](https://peps.python.org/pep-0008/), `Getter` und `Setter` sind, wo es sinnvoll ist, in [`properties`](https://docs.python.org/3/library/functions.html#property) transformiert und die Dokumentation (*doc strings*) sind ebenfalls angepasst worden.
+Das Interface `ComparableContent` ist ein gleichnamiges [`Protocol`](https://docs.python.org/3/library/typing.html#typing.Protocol), definiert in [`nrw.datastructures._comparable_content`](/nrw/datastructures/_comparable_content.py). Es gibt die [*dunder special methods*](https://docs.python.org/3/reference/datamodel.html#object.__lt__), `__eq__`, `__lt__` und `__gt__` für einfache Vergleichsoperationen vor. Das Module stellt auch ein `TypeVar`(<https://docs.python.org/3/library/typing.html#typing.TypeVar>) `ComparableContentT` zur Verfügung.
+
 Außerdem sind (triviale) Optimierungen vorgenommen worden:
 
-- der Python Quellcode wird zu [`C extensions`](https://docs.python.org/3/extending/extending.html) compiliert (nur untersützt für `CPython`)
+- der Python Quellcode wird mit [`mypyc`](https://github.com/mypyc/mypyc) zu [`C extensions`](https://docs.python.org/3/extending/extending.html) compiliert (nur untersützt für `CPython`)
+- Verwendung von [`__slots__`](https://docs.python.org/3/reference/datamodel.html#slots)
 - redundante Aufrufe werden weggelassen
 - interne Optimierungen bei Zuweisungen
 
-Zusätzlich enthält dieses Package hilfreiche Funktionen zum Sortieren, Suchen und Traversiern, zu finden in [`nrw.algorithms`](/nrw/algorithms/):
+Zusätzlich enthält dieses Package nützliche Funktionen zum Sortieren, Suchen und Traversiern, zu finden in [`nrw.algorithms`](/nrw/algorithms/):
 
 - [`linear_search`](/nrw/algorithms/_searching.py)
 - [`depth_first_search`](/nrw/algorithms/_searching.py)
@@ -53,12 +56,14 @@ Zusätzlich enthält dieses Package hilfreiche Funktionen zum Sortieren, Suchen 
 - [`postorder`](/nrw/algorithms/_traversal.py)
 - [`levelorder`](/nrw/algorithms/_traversal.py)
 
-Allerdings muss annotiert werden, dass aufgrund den Natur der Datastrukturen, wie sie vom Land vorgegeben werden, die Laufzeiten nicht optimal sind. Zudem kann es zu ungewollten Nebeneffekte für die Argumente kommen. Welche dies sind wird dem Leser als Übgung überlassen. Es soll nicht vor einem Blick in den Quellcode zurückgeschreckt werden.
+Allerdings muss annotiert werden, dass aufgrund den Natur der Datastrukturen, wie sie vom Land vorgegeben werden, die Laufzeiten nicht optimal sind. Zudem kann es zu ungewollten Nebeneffekte für die Argumente kommen. Welche dies sind, wird dem Leser als Übung überlassen. Es soll nicht vor einem Blick in den Quellcode zurückgeschreckt werden.
 
-Für Hilfe zum jeweiligen Objekt (gilt für alle oben genannte Objekte):
+Für Hilfe zum jeweiligen Objekt (gilt für alle oben genannte Objekte), z.B.:
 
 ```python
-help(object) # object austauschen mit dem jeweiligen Objekt
+from nrw.datastructures import List
+help(List)
+help(List.insert)
 ```
 
 ## Installation
@@ -101,7 +106,7 @@ Vereinfacht: Java, als Programmiersprache in der Bildung, ist eine schlechte Wah
 - das rein objekt-orientierte Paradigma schlechthin unbrauchbar ist.
 - die Syntax und und die statische Typisierung für Anfänger einschränkend sein können.
 
-Diese Probleme und Hürden werden größtenteils in Python überwunden. Allerdings ist Python auch nicht ideal.
+Diese Probleme und Hürden werden größtenteils mit Python überwunden.
 
 ## Unterstützung
 
