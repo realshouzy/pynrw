@@ -95,8 +95,7 @@ class Graph:
         """
         self._edges.to_first()
         while self._edges.has_access:
-            vertex1, vertex2 = self._edges.content.vertices
-            if vertex in {vertex1, vertex2}:
+            if vertex in self._edges.content.vertices:
                 self._edges.remove()
             else:
                 self._edges.next()
@@ -154,8 +153,8 @@ class Graph:
         while self._edges.has_access:
             if self._edges.content is edge:
                 self._edges.remove()
-            else:
-                self._edges.next()
+                return
+            self._edges.next()
 
     def set_all_vertex_marks(self, mark: bool) -> None:
         """Der Auftrag setzt die Markierungen aller Knoten des Graphen auf `mark`."""
