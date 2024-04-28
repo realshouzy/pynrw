@@ -3,9 +3,19 @@ requires = ["setuptools", "wheel", "mypy"]
 build-backend = "setuptools.build_meta"
 
 [project]
-authors = [{ name = "realshouzy" }]
 name = "pynrw"
 description = "Materialien zu den zentralen NRW-Abiturprüfungen im Fach Informatik ab 2018 implementiert in Python."
+keywords = [
+  "nrw",
+  "datastructures",
+  "datenstrukturen",
+  "algorithms",
+  "algorithmen",
+  "education",
+  "bildung",
+]
+readme = "README.md"
+authors = [{ name = "realshouzy" }]
 license = { text = "MIT" }
 classifiers = [
   "Programming Language :: Python :: 3 :: Only",
