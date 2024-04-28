@@ -8,6 +8,10 @@ from nrw.datastructures._edge import Edge
 from nrw.datastructures._vertex import Vertex
 
 
+def test_slots_of_edge() -> None:
+    assert Edge.__slots__ == ("_vertices", "_weight", "_mark")
+
+
 def test_edge_is_unhashable() -> None:
     assert Edge.__hash__ is None
 

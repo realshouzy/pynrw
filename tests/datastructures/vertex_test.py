@@ -7,6 +7,10 @@ import pytest
 from nrw.datastructures._vertex import Vertex
 
 
+def test_slots_of_vertex() -> None:
+    assert Vertex.__slots__ == ("_id", "_mark")
+
+
 def test_vertex_is_unhashable() -> None:
     assert Vertex.__hash__ is None
 
