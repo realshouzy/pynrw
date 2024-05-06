@@ -6,7 +6,7 @@ from nrw.datastructures._vertex import Vertex
 
 class Edge:
     __slots__: Final[tuple[str, str, str]] = ("_vertices", "_weight", "_mark")
-    __hash__ = None  # type: ignore[assignment]
+    type __hash__ = None  # type: ignore[assignment]
 
     def __init__(self, vertex: Vertex, another_vertex: Vertex, weight: int) -> None: ...
     @property

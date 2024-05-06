@@ -5,7 +5,7 @@ from typing import Final
 class Vertex:
 
     __slots__: Final[tuple[str, str]] = ("_id", "_mark")
-    __hash__ = None  # type: ignore[assignment]
+    type __hash__ = None  # type: ignore[assignment]
 
     def __init__(self, id_: str) -> None: ...
     @property
