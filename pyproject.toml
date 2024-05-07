@@ -98,7 +98,16 @@ disable_error_code = ["attr-defined"]
 
 [tool.ruff]
 lint.select = ["ALL"]
-lint.ignore = ["ANN101", "D205", "UP035", "UP036", "SLF001", "FBT001", "S101"]
+lint.ignore = [
+  "ANN101",
+  "D205",
+  "UP035",
+  "UP036",
+  "SLF001",
+  "FBT001",
+  "S101",
+  "PYI026",
+]
 lint.fixable = ["ALL"]
 lint.unfixable = []
 show-fixes = true
