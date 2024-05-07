@@ -61,11 +61,10 @@ class BinaryTree(Generic[_T]):
         """
         if content is None:
             self._node: _BTNode[_T] | None = None
-            return
-
-        self._node = _BTNode(content)
-        self._node._left = left_tree if left_tree is not None else BinaryTree()
-        self._node._right = right_tree if right_tree is not None else BinaryTree()
+        else:
+            self._node = _BTNode(content)
+            self._node._left = left_tree if left_tree is not None else BinaryTree()
+            self._node._right = right_tree if right_tree is not None else BinaryTree()
 
     @property
     def is_empty(self) -> bool:
