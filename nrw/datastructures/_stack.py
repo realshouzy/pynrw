@@ -4,6 +4,7 @@ from __future__ import annotations
 
 __all__: Final[tuple[str]] = ("Stack",)
 
+from io import StringIO
 from typing import Final, Generic, TypeVar
 
 _T = TypeVar("_T")
@@ -49,6 +50,16 @@ class Stack(Generic[_T]):
     def __init__(self) -> None:
         """Ein leerer Stapel wird erzeugt."""
         self._head: _StackNode[_T] | None = None
+
+    def __str__(self) -> str:
+        with StringIO() as buffer:
+            buffer.write(f"{self.__class__.__name__}(")
+            temp: _StackNode[_T] | None = self._head
+            while temp is not None and temp.next_node is not None:
+                buffer.write(f"{temp.content} -> ")
+                temp = temp.next_node
+            buffer.write(f"{temp.content})")
+            return buffer.getvalue()
 
     @property
     def is_empty(self) -> bool:

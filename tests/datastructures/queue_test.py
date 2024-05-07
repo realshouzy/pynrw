@@ -98,5 +98,13 @@ def test_dequeue_on_empty_queue() -> None:
     assert q.front is None
 
 
+def test_list_to_str() -> None:
+    q: Queue[int] = Queue()
+    q.enqueue(1)
+    q.enqueue(2)
+    q.enqueue(3)
+    assert str(q) == "Queue(1 -> 2 -> 3)"
+
+
 if __name__ == "__main__":
     raise SystemExit(pytest.main())

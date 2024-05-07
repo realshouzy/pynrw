@@ -327,5 +327,9 @@ def test_get_previos_on_empty_list(empty_list: List[int]) -> None:
     assert empty_list._get_previous(None) is None
 
 
+def test_list_to_str(sample_list: List[int]) -> None:
+    assert str(sample_list) == "List(1 -> 2 -> 3)"
+
+
 if __name__ == "__main__":
     raise SystemExit(pytest.main())

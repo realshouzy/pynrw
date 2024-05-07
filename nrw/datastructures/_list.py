@@ -4,6 +4,7 @@ from __future__ import annotations
 
 __all__: Final[tuple[str]] = ("List",)
 
+from io import StringIO
 from typing import Final, Generic, TypeVar
 
 _T = TypeVar("_T")
@@ -62,6 +63,16 @@ class List(Generic[_T]):
         self._first: _ListNode[_T] | None = None
         self._last: _ListNode[_T] | None = None
         self._current: _ListNode[_T] | None = None
+
+    def __str__(self) -> str:
+        with StringIO() as buffer:
+            buffer.write(f"{self.__class__.__name__}(")
+            temp: _ListNode[_T] | None = self._first
+            while temp is not self._last:
+                buffer.write(f"{temp.content} -> ")
+                temp = temp.next_node
+            buffer.write(f"{temp.content})")
+            return buffer.getvalue()
 
     @property
     def is_empty(self) -> bool:

@@ -98,5 +98,13 @@ def test_pop_on_empty_stack() -> None:
     assert s.top is None
 
 
+def test_list_to_str() -> None:
+    s: Stack[int] = Stack()
+    s.push(1)
+    s.push(2)
+    s.push(3)
+    assert str(s) == "Stack(3 -> 2 -> 1)"
+
+
 if __name__ == "__main__":
     raise SystemExit(pytest.main())
