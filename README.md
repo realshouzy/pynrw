@@ -31,9 +31,12 @@ Dieses Package implementiert die Datenstrukturen nach den Vorgaben des Landes NR
 - [`Graph`](/nrw/datastructures/_graph.py)
 
 Die Implementation ist semantisch identisch zu der Implementation des Landes mit dem einzigen Unterschied, dass alles mehr *pythonic* ist, d.h. die Benennung der Methoden folgt [`pep8`](https://peps.python.org/pep-0008/), `Getter` und `Setter` sind, wo es sinnvoll ist, in [`properties`](https://docs.python.org/3/library/functions.html#property) transformiert und die Dokumentation (*doc strings*) sind ebenfalls angepasst worden.
+
 Das Interface `ComparableContent` ist ein gleichnamiges [`Protocol`](https://docs.python.org/3/library/typing.html#typing.Protocol), definiert in [`nrw.datastructures._comparable_content`](/nrw/datastructures/_comparable_content.py). Es gibt die [*dunder special methods*](https://docs.python.org/3/reference/datamodel.html#object.__lt__), `__eq__`, `__lt__` und `__gt__` für einfache Vergleichsoperationen vor. Das Module stellt auch ein `TypeVar`(<https://docs.python.org/3/library/typing.html#typing.TypeVar>) `ComparableContentT` zur Verfügung.
 
-Außerdem sind (triviale) Optimierungen vorgenommen worden:
+Außerdem ist `__str__` für die linearen Datenstrukturen implementiert, was das arbeiten mit diesen deutlich vereinfacht
+
+Des weiteren sind (triviale) Optimierungen vorgenommen worden:
 
 - Verwendung von [`__slots__`](https://docs.python.org/3/reference/datamodel.html#slots)
 - redundante Aufrufe werden weggelassen
@@ -88,13 +91,15 @@ lst: List[int] = List()
 for i in range(0, 10, -1):
   lst.append(i)
 
-print(lst.content) # None
+print(lst.content)  # None
 lst.to_first()
-print(lst.content) # 9
+print(lst.content)  # 9
+print(lst)  # List(9 -> 8 -> 7 -> 6 -> 5 -> 4 -> 3 -> 2 -> 1 -> 0)
 
 sorted_lst: List[int] = quick_sort(lst)
 sorted_lst.to_first()
-print(sorted_lst.content) # 0
+print(sorted_lst.content)  # 0
+print(sorted_lst)  # List(0 -> 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> 9)
 ```
 
 ## Motivation
