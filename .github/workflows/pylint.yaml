@@ -21,7 +21,7 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install -U pip setuptools wheel
-        pip install pylint pytest pylint-pytest mypy
+        pip install pylint pytest pylint-pytest
     - name: Analysing the code with pylint
       run: |
         pylint $(git ls-files '*.py')
