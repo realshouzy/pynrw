@@ -34,7 +34,7 @@ Die Implementation ist semantisch identisch zu der Implementation des Landes mit
 
 Das Interface `ComparableContent` ist ein gleichnamiges [`Protocol`](https://docs.python.org/3/library/typing.html#typing.Protocol), definiert in [`nrw.datastructures._comparable_content`](/nrw/datastructures/_comparable_content.py). Es gibt die [*dunder special methods*](https://docs.python.org/3/reference/datamodel.html#object.__lt__), `__eq__`, `__lt__` und `__gt__` für einfache Vergleichsoperationen vor. Das Module stellt auch ein `TypeVar`(<https://docs.python.org/3/library/typing.html#typing.TypeVar>) `ComparableContentT` zur Verfügung.
 
-Außerdem ist `__str__` für die linearen Datenstrukturen implementiert, was das arbeiten mit diesen deutlich vereinfacht
+Außerdem implementieren die linearen Datenstrukturen `__str__`, welches das Arbeiten mit diesen deutlich vereinfacht.
 
 Des weiteren sind (triviale) Optimierungen vorgenommen worden:
 
