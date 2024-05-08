@@ -65,6 +65,9 @@ class List(Generic[_T]):
         self._current: _ListNode[_T] | None = None
 
     def __str__(self) -> str:
+        if self.is_empty:
+            return f"{self.__class__.__name__}()"
+
         with StringIO() as buffer:
             buffer.write(f"{self.__class__.__name__}(")
             temp: _ListNode[_T] | None = self._first

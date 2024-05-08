@@ -52,6 +52,9 @@ class Stack(Generic[_T]):
         self._head: _StackNode[_T] | None = None
 
     def __str__(self) -> str:
+        if self.is_empty:
+            return f"{self.__class__.__name__}()"
+
         with StringIO() as buffer:
             buffer.write(f"{self.__class__.__name__}(")
             temp: _StackNode[_T] | None = self._head

@@ -327,7 +327,11 @@ def test_get_previos_on_empty_list(empty_list: List[int]) -> None:
     assert empty_list._get_previous(None) is None
 
 
-def test_list_to_str(sample_list: List[int]) -> None:
+def test_empty_list_to_str(empty_list: List[int]) -> None:
+    assert str(empty_list) == "List()"
+
+
+def test_non_empty_list_to_str(sample_list: List[int]) -> None:
     assert str(sample_list) == "List(1 -> 2 -> 3)"
 
 

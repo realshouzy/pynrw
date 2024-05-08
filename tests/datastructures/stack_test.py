@@ -100,6 +100,7 @@ def test_pop_on_empty_stack() -> None:
 
 def test_list_to_str() -> None:
     s: Stack[int] = Stack()
+    assert str(s) == "Stack()"
     s.push(1)
     s.push(2)
     s.push(3)

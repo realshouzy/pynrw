@@ -100,6 +100,7 @@ def test_dequeue_on_empty_queue() -> None:
 
 def test_list_to_str() -> None:
     q: Queue[int] = Queue()
+    assert str(q) == "Queue()"
     q.enqueue(1)
     q.enqueue(2)
     q.enqueue(3)

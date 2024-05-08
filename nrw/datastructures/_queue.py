@@ -52,6 +52,9 @@ class Queue(Generic[_T]):
         self._tail: _QueueNode[_T] | None = None
 
     def __str__(self) -> str:
+        if self.is_empty:
+            return f"{self.__class__.__name__}()"
+
         with StringIO() as buffer:
             buffer.write(f"{self.__class__.__name__}(")
             temp: _QueueNode[_T] | None = self._head
