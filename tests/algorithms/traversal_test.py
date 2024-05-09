@@ -6,13 +6,7 @@ from typing import TYPE_CHECKING, Callable, Iterator
 
 import pytest
 
-from nrw.algorithms._traversal import (
-    inorder,
-    levelorder,
-    postorder,
-    preorder,
-    reverse_inorder,
-)
+from nrw.algorithms import inorder, levelorder, postorder, preorder, reverse_inorder
 from nrw.datastructures import BinarySearchTree, BinaryTree
 
 if TYPE_CHECKING:

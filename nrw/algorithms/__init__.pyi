@@ -16,12 +16,14 @@ __all__: Final[tuple[str, ...]] = (
 
 from typing import Final, TypeVar, overload
 
-from nrw.datastructures._binary_search_tree import BinarySearchTree
-from nrw.datastructures._binary_tree import BinaryTree
-from nrw.datastructures._comparable_content import ComparableContentT
-from nrw.datastructures._graph import Graph
-from nrw.datastructures._list import List
-from nrw.datastructures._vertex import Vertex
+from nrw.datastructures import (
+    BinarySearchTree,
+    BinaryTree,
+    ComparableContentT,
+    Graph,
+    List,
+    Vertex,
+)
 
 _T = TypeVar("_T")
 

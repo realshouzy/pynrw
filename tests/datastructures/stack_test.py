@@ -4,7 +4,8 @@ from __future__ import annotations
 
 import pytest
 
-from nrw.datastructures._stack import Stack, _StackNode
+from nrw.datastructures import Stack
+from nrw.datastructures._stack import _StackNode
 
 
 def test_slots_of_stack_node() -> None:

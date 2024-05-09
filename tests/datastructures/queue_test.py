@@ -4,7 +4,8 @@ from __future__ import annotations
 
 import pytest
 
-from nrw.datastructures._queue import Queue, _QueueNode
+from nrw.datastructures import Queue
+from nrw.datastructures._queue import _QueueNode
 
 
 def test_slots_of_queue_node() -> None:

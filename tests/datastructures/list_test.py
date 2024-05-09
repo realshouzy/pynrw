@@ -4,7 +4,8 @@ from __future__ import annotations
 
 import pytest
 
-from nrw.datastructures._list import List, _ListNode
+from nrw.datastructures import List
+from nrw.datastructures._list import _ListNode
 
 
 @pytest.fixture()

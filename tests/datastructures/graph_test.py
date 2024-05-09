@@ -2,16 +2,9 @@
 """Tests for `datastructures._graph`."""
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
-
 import pytest
 
-from nrw.datastructures._edge import Edge
-from nrw.datastructures._graph import Graph
-from nrw.datastructures._vertex import Vertex
-
-if TYPE_CHECKING:
-    from nrw.datastructures._list import List
+from nrw.datastructures import Edge, Graph, List, Vertex
 
 
 @pytest.fixture()

@@ -4,7 +4,8 @@ from __future__ import annotations
 
 import pytest
 
-from nrw.datastructures._binary_search_tree import BinarySearchTree, _BSTNode
+from nrw.datastructures import BinarySearchTree
+from nrw.datastructures._binary_search_tree import _BSTNode
 
 
 @pytest.fixture()

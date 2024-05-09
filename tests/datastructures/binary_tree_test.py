@@ -4,7 +4,8 @@ from __future__ import annotations
 
 import pytest
 
-from nrw.datastructures._binary_tree import BinaryTree, _BTNode
+from nrw.datastructures import BinaryTree
+from nrw.datastructures._binary_tree import _BTNode
 
 
 def test_slots_of_btnode() -> None:

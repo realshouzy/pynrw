@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import pytest
 
-from nrw.datastructures._vertex import Vertex
+from nrw.datastructures import Vertex
 
 
 def test_slots_of_vertex() -> None:
