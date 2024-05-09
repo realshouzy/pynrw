@@ -14,24 +14,52 @@ __all__: Final[tuple[str, ...]] = (
     "levelorder",
 )
 
-from typing import Final
+from typing import Final, TypeVar, overload
 
-from nrw.algorithms._searching import (
-    breadth_first_search,
-    depth_first_search,
-    linear_search,
-)
-from nrw.algorithms._sorting import (
-    bubble_sort,
-    insertion_sort,
-    merge_sort,
-    quick_sort,
-    selection_sort,
-)
-from nrw.algorithms._traversal import (
-    inorder,
-    levelorder,
-    postorder,
-    preorder,
-    reverse_inorder,
-)
+from nrw.datastructures._binary_search_tree import BinarySearchTree
+from nrw.datastructures._binary_tree import BinaryTree
+from nrw.datastructures._comparable_content import ComparableContentT
+from nrw.datastructures._graph import Graph
+from nrw.datastructures._list import List
+from nrw.datastructures._vertex import Vertex
+
+_T = TypeVar("_T")
+
+def linear_search(lst: List[_T], element: _T) -> int: ...
+def depth_first_search(graph: Graph, vertex: Vertex) -> List[Vertex]: ...
+def breadth_first_search(graph: Graph, vertex: Vertex) -> List[Vertex]: ...
+def bubble_sort(lst: List[ComparableContentT]) -> List[ComparableContentT]: ...
+def selection_sort(lst: List[ComparableContentT]) -> List[ComparableContentT]: ...
+def insertion_sort(lst: List[ComparableContentT]) -> List[ComparableContentT]: ...
+def merge_sort(lst: List[ComparableContentT]) -> List[ComparableContentT]: ...
+def quick_sort(lst: List[ComparableContentT]) -> List[ComparableContentT]: ...
+@overload
+def preorder(tree: BinaryTree[_T]) -> List[_T]: ...
+@overload
+def preorder(
+    tree: BinarySearchTree[ComparableContentT],
+) -> List[ComparableContentT]: ...
+@overload
+def inorder(tree: BinaryTree[_T]) -> List[_T]: ...
+@overload
+def inorder(
+    tree: BinarySearchTree[ComparableContentT],
+) -> List[ComparableContentT]: ...
+@overload
+def reverse_inorder(tree: BinaryTree[_T]) -> List[_T]: ...
+@overload
+def reverse_inorder(
+    tree: BinarySearchTree[ComparableContentT],
+) -> List[ComparableContentT]: ...
+@overload
+def postorder(tree: BinaryTree[_T]) -> List[_T]: ...
+@overload
+def postorder(
+    tree: BinarySearchTree[ComparableContentT],
+) -> List[ComparableContentT]: ...
+@overload
+def levelorder(tree: BinaryTree[_T]) -> List[_T]: ...
+@overload
+def levelorder(
+    tree: BinarySearchTree[ComparableContentT],
+) -> List[ComparableContentT]: ...
