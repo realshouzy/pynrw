@@ -66,9 +66,7 @@ class BinarySearchTree(Generic[ComparableContentT]):
         return f"{self.__class__.__name__}(node={self._node!r})"
 
     def __str__(self) -> str:
-        if self.is_empty:
-            return ""
-        return str(self._node)
+        return str(self._node) if not self.is_empty else ""
 
     @property
     def is_empty(self) -> bool:
@@ -178,11 +176,9 @@ class BinarySearchTree(Generic[ComparableContentT]):
         Nachfolger mehr hat. Es ist also später möglich, in einem Baum im
         rechten Nachfolger den Vorgänger des linkesten Nachfolgers zu finden.
         """
-        return (
-            self
-            if self._node_of_left_successor._left.is_empty
-            else self._node._left._ancestor_of_small_right()
-        )
+        if self._node_of_left_successor._left.is_empty:
+            return self
+        return self._node._left._ancestor_of_small_right()
 
     @property
     def _node_of_left_successor(self) -> _BSTNode[ComparableContentT] | None:
