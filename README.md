@@ -6,7 +6,7 @@
 [![CodeQL](https://github.com/realshouzy/pynrw/actions/workflows/codeql.yaml/badge.svg)](https://github.com/realshouzy/pynrw/actions/workflows/codeql.yaml)
 [![PyPI - Version](https://img.shields.io/pypi/v/pynrw)](https://github.com/realshouzy/pynrw/releases/latest)
 [![Python versions](https://img.shields.io/pypi/pyversions/pynrw.svg)](https://pypi.org/project/pynrw/)
-[![semantic-release](https://img.shields.io/badge/%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/realshouzy/YTDownloader/releases)
+[![semantic-release](https://img.shields.io/badge/%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/realshouzy/pynrw/releases)
 [![PyPI - Format](https://img.shields.io/pypi/format/pynrw)](https://pypi.org/project/pynrw/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/realshouzy/pynrw/blob/main/LICENSE)
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
@@ -32,9 +32,29 @@ Dieses Package implementiert die Datenstrukturen nach den Vorgaben des Landes NR
 
 Die Implementation ist semantisch identisch zu der Implementation des Landes mit dem einzigen Unterschied, dass alles mehr *pythonic* ist, d.h. die Benennung der Methoden folgt [`pep8`](https://peps.python.org/pep-0008/), `Getter` und `Setter` sind, wo es sinnvoll ist, in [`properties`](https://docs.python.org/3/library/functions.html#property) transformiert und die Dokumentation (*doc strings*) sind ebenfalls angepasst worden.
 
-Das Interface `ComparableContent` ist ein gleichnamiges [`Protocol`](https://docs.python.org/3/library/typing.html#typing.Protocol), definiert in [`nrw.datastructures._comparable_content`](/nrw/datastructures/_comparable_content.py). Es gibt die [*dunder special methods*](https://docs.python.org/3/reference/datamodel.html#object.__lt__), `__eq__`, `__lt__` und `__gt__` für einfache Vergleichsoperationen vor. Das Module stellt auch ein `TypeVar`(<https://docs.python.org/3/library/typing.html#typing.TypeVar>) `ComparableContentT` zur Verfügung.
+Das Interface `ComparableContent` ist ein gleichnamiges [`Protocol`](https://docs.python.org/3/library/typing.html#typing.Protocol), definiert in [`nrw.datastructures._comparable_content`](/nrw/datastructures/_comparable_content.py). Es gibt die [*dunder special methods*](https://docs.python.org/3/reference/datamodel.html#object.__lt__), `__eq__`, `__lt__` und `__gt__` für einfache Vergleichsoperationen vor. Das Module stellt auch ein [`TypeVar`](https://docs.python.org/3/library/typing.html#typing.TypeVar) `ComparableContentT` zur Verfügung.
 
-Außerdem implementieren die linearen Datenstrukturen `__str__`, welches das Arbeiten mit diesen deutlich vereinfacht.
+Außerdem implementieren die Datenstrukturen `__str__`, welches das Arbeiten mit diesen deutlich vereinfacht (besonders für `Binary(Search)Tree`) und `__repr__`, welches eine grobe Idee der internen Strukture gibt, z.B.:
+
+```python
+from nrw.datastructures import BinarySearchTree
+
+bst: BinarySearchTree[int] = BinarySearchTree()
+bst.insert(3)
+bst.insert(2)
+bst.insert(5)
+bst.insert(0)
+bst.insert(1)
+bst.insert(4)
+print(bst)
+#    _4_
+#   /   \
+#  _2   6
+# /  \ /
+# 0  3 5
+#  \
+#  1
+```
 
 Des weiteren sind (triviale) Optimierungen vorgenommen worden:
 
@@ -58,7 +78,7 @@ Zusätzlich enthält dieses Package nützliche Funktionen zum Sortieren, Suchen 
 - [`postorder`](/nrw/algorithms/_traversal.py)
 - [`levelorder`](/nrw/algorithms/_traversal.py)
 
-Allerdings muss annotiert werden, dass aufgrund den Natur der Datastrukturen, wie sie vom Land vorgegeben werden, die Laufzeiten nicht optimal sind. Zudem kann es zu ungewollten Nebeneffekte für die Argumente kommen. Welche dies sind, wird dem Leser als Übung überlassen. Es soll nicht vor einem Blick in den Quellcode zurückgeschreckt werden.
+Allerdings muss annotiert werden, dass aufgrund der Vorgaben des Landes die Laufzeiten nicht optimal sind. Zudem kann es zu ungewollten Nebeneffekte kommen. Welche dies sind, wird dem Leser als Übung überlassen. Es soll nicht vor einem Blick in den Quellcode zurückgeschreckt werden.
 
 Für Hilfe zum jeweiligen Objekt (gilt für alle oben genannte Objekte), z.B.:
 
