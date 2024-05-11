@@ -21,6 +21,12 @@ class _ListNode(Generic[_T]):
         self._content: _T = content
         self._next_node: _ListNode[_T] | None = None
 
+    def __repr__(self) -> str:
+        return (
+            f"{self.__class__.__name__}(content={self._content!r}, "
+            f"next_node={self._next_node!r})"
+        )
+
     @property
     def content(self) -> _T:
         """Liefert das Inhaltsobjekt des Knotens."""
@@ -63,6 +69,12 @@ class List(Generic[_T]):
         self._first: _ListNode[_T] | None = None
         self._last: _ListNode[_T] | None = None
         self._current: _ListNode[_T] | None = None
+
+    def __repr__(self) -> str:
+        return (
+            f"{self.__class__.__name__}(first={self._first!r}, last={self._last!r}, "
+            f"current={self._current!r})"
+        )
 
     def __str__(self) -> str:
         if self.is_empty:

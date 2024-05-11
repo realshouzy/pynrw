@@ -30,6 +30,16 @@ class Edge:
         self._weight: int = weight
         self._mark: bool = False
 
+    def __repr__(self) -> str:
+        return (
+            f"{self.__class__.__name__}(vertices={self._vertices!r}, "
+            f"weight={self._weight!r}, mark={self._mark!r})"
+        )
+
+    def __str__(self) -> str:
+        vertex1, vertex2 = self._vertices
+        return f"{vertex1} --{self._weight}-- {vertex2}"
+
     @property
     def vertices(self) -> tuple[Vertex, Vertex]:
         """Die Anfrage gibt die beiden Knoten, die durch die Kante verbunden werden,

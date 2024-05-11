@@ -16,14 +16,24 @@ def test_stack_node_is_unhashable() -> None:
     assert _StackNode.__hash__ is None
 
 
-def test_queue_node_creation_and_content() -> None:
+def test_stack_node_repr() -> None:
+    s_node = _StackNode(1)
+    assert repr(s_node) == "_StackNode(content=1, next_node=None)"
+    s_node.next_node = _StackNode(2)
+    assert (
+        repr(s_node)
+        == "_StackNode(content=1, next_node=_StackNode(content=2, next_node=None))"
+    )
+
+
+def test_stack_node_creation_and_content() -> None:
     content: str = "test"
     node: _StackNode[str] = _StackNode(content)
     assert node.content == content
     assert node.next_node is None
 
 
-def test_queue_node_next_node() -> None:
+def test_stack_node_next_node() -> None:
     content1: str = "test1"
     content2: str = "test2"
     node1: _StackNode[str] = _StackNode(content1)
@@ -106,6 +116,18 @@ def test_list_to_str() -> None:
     s.push(2)
     s.push(3)
     assert str(s) == "Stack(3 -> 2 -> 1)"
+
+
+def test_repr_of_stack() -> None:
+    s: Stack[int] = Stack()
+    assert repr(s) == "Stack(head=None)"
+    s.push(1)
+    s.push(2)
+    s.push(3)
+    assert (
+        repr(s) == "Stack(head=_StackNode(content=3, next_node=_StackNode(content=2, "
+        "next_node=_StackNode(content=1, next_node=None))))"
+    )
 
 
 if __name__ == "__main__":

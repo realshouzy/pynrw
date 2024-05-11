@@ -5,6 +5,7 @@ from __future__ import annotations
 from typing import Final, Generic
 
 from nrw.datastructures._comparable_content import ComparableContentT
+from nrw.datastructures._utils import display_binary_node
 
 
 class _BSTNode(Generic[ComparableContentT]):
@@ -20,6 +21,15 @@ class _BSTNode(Generic[ComparableContentT]):
         self._content: ComparableContentT = content
         self._left: BinarySearchTree[ComparableContentT] = BinarySearchTree()
         self._right: BinarySearchTree[ComparableContentT] = BinarySearchTree()
+
+    def __repr__(self) -> str:
+        return (
+            f"{self.__class__.__name__}(content={self._content!r}, "
+            f"left_tree={self._left!r}, right_tree={self._right!r})"
+        )
+
+    def __str__(self) -> str:
+        return display_binary_node(self)
 
 
 class BinarySearchTree(Generic[ComparableContentT]):
@@ -51,6 +61,14 @@ class BinarySearchTree(Generic[ComparableContentT]):
     def __init__(self) -> None:
         """Der Konstruktor erzeugt einen leeren Suchbaum."""
         self._node: _BSTNode[ComparableContentT] | None = None
+
+    def __repr__(self) -> str:
+        return f"{self.__class__.__name__}(node={self._node!r})"
+
+    def __str__(self) -> str:
+        if self.is_empty:
+            return ""
+        return str(self._node)
 
     @property
     def is_empty(self) -> bool:

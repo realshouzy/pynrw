@@ -108,6 +108,7 @@ lint.ignore = [
   "FBT001",
   "S101",
   "PYI026",
+  "B905",
 ]
 lint.fixable = ["ALL"]
 lint.unfixable = []

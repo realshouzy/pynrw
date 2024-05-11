@@ -400,5 +400,44 @@ def test_get_edges(graph: Graph) -> None:
         edges_of_vertex1.next()
 
 
+def test_str_of_graph(graph: Graph) -> None:
+    assert str(graph) == "Graph()"
+
+    vertex1: Vertex = Vertex("A")
+    graph.add_vertex(vertex1)
+    vertex2: Vertex = Vertex("B")
+    graph.add_vertex(vertex2)
+    edge: Edge = Edge(vertex1, vertex2, 1)
+    graph.add_edge(edge)
+
+    assert str(graph) == "Graph(A -> List(B), B -> List(A))"
+
+
+def test_repr_of_graph(graph: Graph) -> None:
+    assert (
+        repr(graph) == "Graph(vertices=List(first=None, last=None, current=None), "
+        "edges=List(first=None, last=None, current=None))"
+    )
+
+    vertex1: Vertex = Vertex("A")
+    graph.add_vertex(vertex1)
+    vertex2: Vertex = Vertex("B")
+    graph.add_vertex(vertex2)
+    edge: Edge = Edge(vertex1, vertex2, 1)
+    graph.add_edge(edge)
+
+    assert (
+        repr(graph) == "Graph(vertices=List(first=_ListNode(content=Vertex(id='A', "
+        "mark=False), next_node=_ListNode(content=Vertex(id='B', mark=False), "
+        "next_node=None)), last=_ListNode(content=Vertex(id='B', mark=False), "
+        "next_node=None), current=_ListNode(content=Vertex(id='B', mark=False), "
+        "next_node=None)), edges=List(first=_ListNode(content=Edge(vertices=("
+        "Vertex(id='A', mark=False), Vertex(id='B', mark=False)), weight=1, mark=False)"
+        ", next_node=None), last=_ListNode(content=Edge(vertices=(Vertex(id='A', "
+        "mark=False), Vertex(id='B', mark=False)), weight=1, mark=False), "
+        "next_node=None), current=None))"
+    )
+
+
 if __name__ == "__main__":
     raise SystemExit(pytest.main())

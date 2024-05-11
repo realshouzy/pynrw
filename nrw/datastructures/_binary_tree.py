@@ -6,6 +6,8 @@ __all__: Final[tuple[str]] = ("BinaryTree",)
 
 from typing import Final, Generic, TypeVar
 
+from nrw.datastructures._utils import display_binary_node
+
 _T = TypeVar("_T")
 
 
@@ -22,6 +24,15 @@ class _BTNode(Generic[_T]):
         self._content: _T = content
         self._left: BinaryTree[_T] | None = BinaryTree()
         self._right: BinaryTree[_T] | None = BinaryTree()
+
+    def __repr__(self) -> str:
+        return (
+            f"{self.__class__.__name__}(content={self._content!r}, "
+            f"left_tree={self._left!r}, right_tree={self._right!r})"
+        )
+
+    def __str__(self) -> str:
+        return display_binary_node(self)
 
 
 class BinaryTree(Generic[_T]):
@@ -65,6 +76,14 @@ class BinaryTree(Generic[_T]):
             self._node = _BTNode(content)
             self._node._left = left_tree if left_tree is not None else BinaryTree()
             self._node._right = right_tree if right_tree is not None else BinaryTree()
+
+    def __repr__(self) -> str:
+        return f"{self.__class__.__name__}(node={self._node!r})"
+
+    def __str__(self) -> str:
+        if self.is_empty:
+            return ""
+        return str(self._node)
 
     @property
     def is_empty(self) -> bool:

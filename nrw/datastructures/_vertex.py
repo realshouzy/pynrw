@@ -24,6 +24,12 @@ class Vertex:
         self._id: str = id_
         self._mark: bool = False
 
+    def __repr__(self) -> str:
+        return f"{self.__class__.__name__}(id={self._id!r}, mark={self._mark!r})"
+
+    def __str__(self) -> str:
+        return self._id
+
     @property
     def id(self) -> str:
         """Die Anfrage liefert die ID des Knotens als String."""

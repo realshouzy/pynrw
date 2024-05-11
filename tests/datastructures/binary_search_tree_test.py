@@ -30,6 +30,19 @@ def test_bstnode_is_unhashable() -> None:
     assert _BSTNode.__hash__ is None
 
 
+def test_str_of_bstnode() -> None:
+    btnode: _BSTNode[int] = _BSTNode(1)
+    assert str(btnode) == "1"
+
+
+def test_repr_of_bstnode() -> None:
+    node: _BSTNode[int] = _BSTNode(1)
+    assert (
+        repr(node) == "_BSTNode(content=1, left_tree=BinarySearchTree(node=None), "
+        "right_tree=BinarySearchTree(node=None))"
+    )
+
+
 def test_bstnode_construction() -> None:
     node: _BSTNode[int] = _BSTNode(1)
 
@@ -48,6 +61,35 @@ def test_bst_slots() -> None:
 
 def test_bst_is_unhashable() -> None:
     assert BinarySearchTree.__hash__ is None
+
+
+def test_str_of_binary_tree() -> None:
+    tree: BinarySearchTree[int] = BinarySearchTree()
+    assert str(tree) == ""
+
+    tree.insert(1)
+    tree.insert(0)
+    tree.insert(2)
+    tree.insert(-1)
+    tree.insert(3)
+    assert str(tree) == "   1  \n  / \\ \n  0 2 \n /   \\\n-1   3"
+
+
+def test_repr_of_bst() -> None:
+    tree: BinarySearchTree[int] = BinarySearchTree()
+    assert repr(tree) == "BinarySearchTree(node=None)"
+
+    tree.insert(1)
+    tree.insert(0)
+    tree.insert(2)
+    assert (
+        repr(tree)
+        == "BinarySearchTree(node=_BSTNode(content=1, left_tree=BinarySearchTree("
+        "node=_BSTNode(content=0, left_tree=BinarySearchTree(node=None), "
+        "right_tree=BinarySearchTree(node=None))), "
+        "right_tree=BinarySearchTree(node=_BSTNode(content=2, left_tree="
+        "BinarySearchTree(node=None), right_tree=BinarySearchTree(node=None)))))"
+    )
 
 
 def test_bst_construction(empty_bst: BinarySearchTree[int]) -> None:

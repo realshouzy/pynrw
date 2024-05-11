@@ -21,6 +21,12 @@ class _StackNode(Generic[_T]):
         self._content: _T = content
         self._next_node: _StackNode[_T] | None = None
 
+    def __repr__(self) -> str:
+        return (
+            f"{self.__class__.__name__}(content={self._content!r}, "
+            f"next_node={self._next_node!r})"
+        )
+
     @property
     def content(self) -> _T:
         """Liefert das Inhaltsobjekt des Knotens."""
@@ -50,6 +56,9 @@ class Stack(Generic[_T]):
     def __init__(self) -> None:
         """Ein leerer Stapel wird erzeugt."""
         self._head: _StackNode[_T] | None = None
+
+    def __repr__(self) -> str:
+        return f"{self.__class__.__name__}(head={self._head!r})"
 
     def __str__(self) -> str:
         if self.is_empty:

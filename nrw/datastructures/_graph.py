@@ -4,6 +4,7 @@ from __future__ import annotations
 
 __all__: Final[tuple[str]] = ("Graph",)
 
+from io import StringIO
 from typing import TYPE_CHECKING, Final
 
 from nrw.datastructures._list import List
@@ -35,6 +36,26 @@ class Graph:
         """
         self._vertices: List[Vertex] = List()
         self._edges: List[Edge] = List()
+
+    def __repr__(self) -> str:
+        return (
+            f"{self.__class__.__name__}(vertices={self._vertices!r}, "
+            f"edges={self._edges!r})"
+        )
+
+    def __str__(self) -> str:
+        if self.is_empty:
+            return f"{self.__class__.__name__}()"
+
+        with StringIO() as buffer:
+            buffer.write(f"{self.__class__.__name__}(")
+            self._vertices.to_first()
+            while self._vertices.has_access:
+                current: Vertex | None = self._vertices.content
+                assert current is not None
+                buffer.write(f"{current} -> {self.get_neighbours(current)}, ")
+                self._vertices.next()
+            return f"{buffer.getvalue().removesuffix(', ')})"
 
     @property
     def vertices(self) -> List[Vertex]:

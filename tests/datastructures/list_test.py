@@ -35,6 +35,15 @@ def test_list_node_is_unhashable() -> None:
     assert _ListNode.__hash__ is None
 
 
+def test_list_node_repr(sample_node: _ListNode[int]) -> None:
+    assert repr(sample_node) == "_ListNode(content=1, next_node=None)"
+    sample_node.next_node = _ListNode(2)
+    assert (
+        repr(sample_node)
+        == "_ListNode(content=1, next_node=_ListNode(content=2, next_node=None))"
+    )
+
+
 def test_list_node_creation_and_properties(sample_node: _ListNode[int]) -> None:
     assert sample_node.content == 1
     assert sample_node.next_node is None
@@ -334,6 +343,19 @@ def test_empty_list_to_str(empty_list: List[int]) -> None:
 
 def test_non_empty_list_to_str(sample_list: List[int]) -> None:
     assert str(sample_list) == "List(1 -> 2 -> 3)"
+
+
+def test_repr_of_empty_list(empty_list: List[int]) -> None:
+    assert repr(empty_list) == "List(first=None, last=None, current=None)"
+
+
+def test_repr_of_non_empty_list(sample_list: List[int]) -> None:
+    assert (
+        repr(sample_list)
+        == "List(first=_ListNode(content=1, next_node=_ListNode(content=2, next_node="
+        "_ListNode(content=3, next_node=None))), "
+        "last=_ListNode(content=3, next_node=None), current=None)"
+    )
 
 
 if __name__ == "__main__":

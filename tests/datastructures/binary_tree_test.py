@@ -16,6 +16,31 @@ def test_btnode_is_unhashable() -> None:
     assert _BTNode.__hash__ is None
 
 
+def test_str_of_btnode() -> None:
+    btnode: _BTNode[int] = _BTNode(1)
+    assert str(btnode) == "1"
+    btnode._left = BinaryTree(0)  # type: ignore[assignment]
+    btnode._right = BinaryTree(2)  # type: ignore[assignment]
+    assert str(btnode) == " 1 \n/ \\\n0 2"
+
+
+def test_repr_of_btnode() -> None:
+    btnode: _BTNode[int] = _BTNode(1)
+    assert (
+        repr(btnode)
+        == "_BTNode(content=1, left_tree=BinaryTree(node=None), right_tree=BinaryTree(node=None))"
+    )
+    btnode._left = BinaryTree(0)  # type: ignore[assignment]
+    btnode._right = BinaryTree(2)  # type: ignore[assignment]
+    assert (
+        repr(btnode)
+        == "_BTNode(content=1, left_tree=BinaryTree(node=_BTNode(content=0, "
+        "left_tree=BinaryTree(node=None), right_tree=BinaryTree(node=None))), "
+        "right_tree=BinaryTree(node=_BTNode(content=2, left_tree=BinaryTree(node=None),"
+        " right_tree=BinaryTree(node=None))))"
+    )
+
+
 def test_btnode() -> None:
     node: _BTNode[int] = _BTNode(42)
 
@@ -38,6 +63,32 @@ def test_slots_of_binary_tree() -> None:
 
 def test_binary_tree_is_unhashable() -> None:
     assert BinaryTree.__hash__ is None
+
+
+def test_repr_of_binary_tree() -> None:
+    tree: BinaryTree[int] = BinaryTree()
+    assert repr(tree) == "BinaryTree(node=None)"
+
+    tree.content = 1
+    tree.left_tree = BinaryTree(0)
+    tree.right_tree = BinaryTree(2)
+    assert (
+        repr(tree) == "BinaryTree(node=_BTNode(content=1, left_tree=BinaryTree("
+        "node=_BTNode(content=0, left_tree=BinaryTree(node=None), "
+        "right_tree=BinaryTree(node=None))), "
+        "right_tree=BinaryTree(node=_BTNode(content=2, left_tree=BinaryTree(node=None),"
+        " right_tree=BinaryTree(node=None)))))"
+    )
+
+
+def test_str_of_binary_tree() -> None:
+    tree: BinaryTree[int] = BinaryTree()
+    assert str(tree) == ""
+
+    tree.content = 1
+    tree.left_tree = BinaryTree(0)
+    tree.right_tree = BinaryTree(2)
+    assert str(tree) == " 1 \n/ \\\n0 2"
 
 
 def test_binary_tree_construction_with_no_params_and_getters() -> None:

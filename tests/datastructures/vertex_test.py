@@ -15,6 +15,18 @@ def test_vertex_is_unhashable() -> None:
     assert Vertex.__hash__ is None
 
 
+def test_str_of_vertex() -> None:
+    vertex: Vertex = Vertex("A")
+    assert str(vertex) == "A"
+
+
+def test_repr_of_vertex() -> None:
+    vertex: Vertex = Vertex("A")
+    assert repr(vertex) == "Vertex(id='A', mark=False)"
+    vertex.mark = True
+    assert repr(vertex) == "Vertex(id='A', mark=True)"
+
+
 def test_vertex_construction_and_getters() -> None:
     vertex: Vertex = Vertex("A")
     assert vertex.id == "A"

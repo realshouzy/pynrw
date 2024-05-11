@@ -21,6 +21,12 @@ class _QueueNode(Generic[_T]):
         self._content: _T = content
         self._next_node: _QueueNode[_T] | None = None
 
+    def __repr__(self) -> str:
+        return (
+            f"{self.__class__.__name__}(content={self._content!r}, "
+            f"next_node={self._next_node!r})"
+        )
+
     @property
     def content(self) -> _T:
         """Liefert das Inhaltsobjekt des Knotens."""
@@ -50,6 +56,9 @@ class Queue(Generic[_T]):
         """Eine leere Schlange wird erzeugt."""
         self._head: _QueueNode[_T] | None = None
         self._tail: _QueueNode[_T] | None = None
+
+    def __repr__(self) -> str:
+        return f"{self.__class__.__name__}(head={self._head!r}, tail={self._tail!r})"
 
     def __str__(self) -> str:
         if self.is_empty:

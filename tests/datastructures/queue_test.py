@@ -16,6 +16,16 @@ def test_queue_node_is_unhashable() -> None:
     assert _QueueNode.__hash__ is None
 
 
+def test_queue_node_repr() -> None:
+    q_node = _QueueNode(1)
+    assert repr(q_node) == "_QueueNode(content=1, next_node=None)"
+    q_node.next_node = _QueueNode(2)
+    assert (
+        repr(q_node)
+        == "_QueueNode(content=1, next_node=_QueueNode(content=2, next_node=None))"
+    )
+
+
 def test_queue_node_creation_and_content() -> None:
     content: str = "test"
     node: _QueueNode[str] = _QueueNode(content)
@@ -106,6 +116,19 @@ def test_list_to_str() -> None:
     q.enqueue(2)
     q.enqueue(3)
     assert str(q) == "Queue(1 -> 2 -> 3)"
+
+
+def test_repr_of_queue() -> None:
+    q: Queue[int] = Queue()
+    assert repr(q) == "Queue(head=None, tail=None)"
+    q.enqueue(1)
+    q.enqueue(2)
+    q.enqueue(3)
+    assert (
+        repr(q) == "Queue(head=_QueueNode(content=1, next_node=_QueueNode(content=2, "
+        "next_node=_QueueNode(content=3, next_node=None))), "
+        "tail=_QueueNode(content=3, next_node=None))"
+    )
 
 
 if __name__ == "__main__":
