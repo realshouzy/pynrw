@@ -17,7 +17,7 @@ def display_binary_node(node: _BTNode[_T] | _BSTNode[ComparableContentT]) -> str
     return "\n".join(lines)
 
 
-def _display_binary_node_impl(
+def _display_binary_node_impl(  # pylint: disable=R0914
     node: _BTNode[_T] | _BSTNode[ComparableContentT],
 ) -> tuple[list[str], int, int, int]:
     """Based on the implementation by J.V.

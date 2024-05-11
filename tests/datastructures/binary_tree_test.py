@@ -27,8 +27,8 @@ def test_str_of_btnode() -> None:
 def test_repr_of_btnode() -> None:
     btnode: _BTNode[int] = _BTNode(1)
     assert (
-        repr(btnode)
-        == "_BTNode(content=1, left_tree=BinaryTree(node=None), right_tree=BinaryTree(node=None))"
+        repr(btnode) == "_BTNode(content=1, left_tree=BinaryTree(node=None), "
+        "right_tree=BinaryTree(node=None))"
     )
     btnode._left = BinaryTree(0)  # type: ignore[assignment]
     btnode._right = BinaryTree(2)  # type: ignore[assignment]

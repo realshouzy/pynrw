@@ -55,7 +55,7 @@ class Graph:
                 assert current is not None
                 buffer.write(f"{current} -> {self.get_neighbours(current)}, ")
                 self._vertices.next()
-            return f"{buffer.getvalue().removesuffix(', ')})"
+            return f"{buffer.getvalue().rstrip(', ')})"
 
     @property
     def vertices(self) -> List[Vertex]:
