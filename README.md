@@ -17,6 +17,40 @@ This package implements the datastructures given by the German state NRW in Pyth
 
 **Dieses Package dient alleine zu Bildungszwecken und sollte nicht in Produktion genutzt werden!**
 
+## Installation
+
+```bash
+pip install pynrw
+```
+
+Alternativ:
+
+```bash
+pip install git+https://github.com/realshouzy/pynrw.git
+```
+
+## Beispiel
+
+```python
+from nrw.algorithms import quick_sort
+from nrw.datastructures import List
+
+lst: List[int] = List()
+
+for i in range(0, 10, -1):
+  lst.append(i)
+
+print(lst.content)  # None
+lst.to_first()
+print(lst.content)  # 9
+print(lst)  # List(9 -> 8 -> 7 -> 6 -> 5 -> 4 -> 3 -> 2 -> 1 -> 0)
+
+sorted_lst: List[int] = quick_sort(lst)
+sorted_lst.to_first()
+print(sorted_lst.content)  # 0
+print(sorted_lst)  # List(0 -> 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> 9)
+```
+
 ## Dokumentation
 
 Dieses Package implementiert die Datenstrukturen nach den Vorgaben des Landes NRW in Python, zu finden in [`nrw.datastructures`](/nrw/datastructures/), d.s.:
@@ -86,40 +120,6 @@ Für Hilfe zum jeweiligen Objekt (gilt für alle oben genannte Objekte), z.B.:
 from nrw.datastructures import List
 help(List)
 help(List.insert)
-```
-
-## Installation
-
-```bash
-pip install pynrw
-```
-
-Alternativ:
-
-```bash
-pip install git+https://github.com/realshouzy/pynrw.git
-```
-
-## Beispiel
-
-```python
-from nrw.algorithms import quick_sort
-from nrw.datastructures import List
-
-lst: List[int] = List()
-
-for i in range(0, 10, -1):
-  lst.append(i)
-
-print(lst.content)  # None
-lst.to_first()
-print(lst.content)  # 9
-print(lst)  # List(9 -> 8 -> 7 -> 6 -> 5 -> 4 -> 3 -> 2 -> 1 -> 0)
-
-sorted_lst: List[int] = quick_sort(lst)
-sorted_lst.to_first()
-print(sorted_lst.content)  # 0
-print(sorted_lst)  # List(0 -> 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> 9)
 ```
 
 ## Motivation
