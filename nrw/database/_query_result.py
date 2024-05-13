@@ -21,12 +21,12 @@ class QueryResult:
         self,
         data: list[tuple[Any, ...]],
         column_names: tuple[str, ...],
-        column_types: tuple[Any, ...],
+        column_types: tuple[type | str | None, ...],
     ) -> None:
         """Interner Konstruktor."""
         self._data: list[tuple[Any, ...]] = data
         self._column_names: tuple[str, ...] = column_names
-        self._column_types: tuple[Any, ...] = column_types
+        self._column_types: tuple[type | str | None, ...] = column_types
 
     @property
     def data(self) -> list[tuple[Any, ...]]:
@@ -44,7 +44,7 @@ class QueryResult:
         return self._column_names
 
     @property
-    def column_types(self) -> tuple[Any, ...]:
+    def column_types(self) -> tuple[type | str | None, ...]:
         """Die Anfrage liefert (wenn möglich) die Typenbezeichnung der Spalten der
         Ergebnistabelle als `tuple` vom jeweiligen Typ zurück.
         Die Bezeichnungen entsprechen den Angaben in der `MySQL`-Datenbank.

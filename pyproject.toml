@@ -131,7 +131,7 @@ required-imports = ["from __future__ import annotations"]
 convention = "pep257"
 
 [tool.pylint]
-disable = ["C0116", "R0801", "W0212", "R0903", "C0114", "I1101"]
+disable = ["C0116", "R0801", "W0212", "R0903", "C0114", "I1101", "C0301"]
 load-plugins = "pylint_pytest"
 
 [tool.bandit]

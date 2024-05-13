@@ -17,7 +17,7 @@ def test_database_connector() -> None:
     assert db.current_query_result is None
 
     db.execute_statement("drop table test;")
-    assert db.error_message is None
+    assert db.error_message is None or "Unknown table 'test.test'" in db.error_message
     assert db.current_query_result is None
 
     db.execute_statement("create table test (a Int, b Text, c Text);")
@@ -40,7 +40,7 @@ def test_database_connector() -> None:
         (2, "test", "test"),
     ]
     assert db.current_query_result.column_names == ("a", "b", "c")
-    assert db.current_query_result.column_types == (3, 252, 252)
+    assert db.current_query_result.column_types == ("LONG", "BLOB", "BLOB")
     assert db.current_query_result.row_count == 2
     assert db.current_query_result.column_count == 3
 

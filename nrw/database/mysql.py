@@ -7,6 +7,7 @@ __all__: Final[tuple[str]] = ("DatabaseConnector",)
 from typing import TYPE_CHECKING, Final
 
 import mysql.connector
+from mysql.connector import FieldType
 
 from nrw.database._query_result import QueryResult
 
@@ -85,8 +86,8 @@ class DatabaseConnector:
                     column_names: tuple[str, ...] = tuple(
                         column[0] for column in cursor.description
                     )
-                    colum_types: tuple[int, ...] = tuple(
-                        column[1] for column in cursor.description
+                    colum_types: tuple[str | None, ...] = tuple(
+                        FieldType.get_info(column[1]) for column in cursor.description  # type: ignore[misc]
                     )
                     self._current_query_result = QueryResult(
                         data,  # type: ignore[arg-type]

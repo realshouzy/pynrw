@@ -77,7 +77,7 @@ class DatabaseConnector:
                     column_names: tuple[str, ...] = tuple(
                         column[0] for column in cursor.description
                     )
-                    colum_types: tuple[int, ...] = tuple(
+                    colum_types: tuple[type, ...] = tuple(
                         column[1] for column in cursor.description
                     )
                     self._current_query_result = QueryResult(
