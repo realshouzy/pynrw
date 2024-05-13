@@ -4,6 +4,7 @@ black
 covdefaults
 coverage
 isort
+git+https://github.com/realshouzy/msaccessdb
 mypy
 pre-commit
 pylint

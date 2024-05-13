@@ -31,7 +31,7 @@ classifiers = [
   "Operating System :: OS Independent",
 ]
 requires-python = ">=3.8"
-dynamic = ["version"]
+dynamic = ["version", "dependencies"]
 
 [project.optional-dependencies]
 # keep in sync with requirements-dev.txt
@@ -41,6 +41,7 @@ dev = [
   "covdefaults",
   "coverage",
   "isort",
+  "git+https://github.com/realshouzy/msaccessdb",
   "mypy",
   "pre-commit",
   "pylint",
@@ -59,6 +60,7 @@ datastructures = ["py.typed", "*.pyi"]
 
 [tool.setuptools.dynamic]
 version = { attr = "nrw.__version__" }
+dependencies = { file = "requirements.txt" }
 
 [tool.black]
 target-version = ["py312", "py311", "py310", "py39", "py38"]
@@ -119,6 +121,7 @@ line-length = 88
 [tool.ruff.lint.extend-per-file-ignores]
 "./tests/*_test.py" = ["SLF001", "D100", "D103", "PLR2004"]
 "./tests/*.py" = ["D104"]
+"./nrw/database/*.py" = ["BLE001", "PLR0913", "ARG002"]
 
 [tool.ruff.lint.isort]
 known-first-party = ["nrw"]
@@ -128,7 +131,7 @@ required-imports = ["from __future__ import annotations"]
 convention = "pep257"
 
 [tool.pylint]
-disable = ["C0116", "R0801", "W0212", "R0903", "C0114"]
+disable = ["C0116", "R0801", "W0212", "R0903", "C0114", "I1101"]
 load-plugins = "pylint_pytest"
 
 [tool.bandit]
@@ -140,4 +143,11 @@ testpaths = ["tests"]
 python_files = ["*_test.py"]
 
 [tool.coverage.run]
+omit = ["./tests/*"]
 plugins = ["covdefaults"]
+
+[tool.coverage.report]
+exclude_also = [
+  "except Exception as exception:",
+  "if self._connection is None:",
+]
