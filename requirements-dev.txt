@@ -3,8 +3,8 @@ bandit
 black
 covdefaults
 coverage
-isort
 git+https://github.com/realshouzy/msaccessdb
+isort
 mypy
 pre-commit
 pylint
