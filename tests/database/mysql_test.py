@@ -9,6 +9,10 @@ from nrw.database.mysql import DatabaseConnector
 
 def test_database_connector() -> None:
     db: DatabaseConnector = DatabaseConnector("127.0.0.1", 3306, "test", "test", "test")
+
+    if db.error_message is not None:
+        pytest.skip(reason="MySQL unavailable")
+
     assert db.error_message is None
     assert db.current_query_result is None
 
@@ -45,6 +49,4 @@ def test_database_connector() -> None:
 
 
 if __name__ == "__main__":
-    raise SystemExit(pytest.main())
-    raise SystemExit(pytest.main())
     raise SystemExit(pytest.main())

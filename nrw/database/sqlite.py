@@ -48,8 +48,8 @@ class DatabaseConnector:
         try:
             self._connection: sqlite3.Connection | None = sqlite3.connect(
                 database,
-                autocommit=True,
-            )  # type: ignore[call-arg]
+                isolation_level=None,
+            )
         except Exception as exception:
             self._connection = None
             self._message = str(exception)

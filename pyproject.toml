@@ -41,7 +41,7 @@ dev = [
   "covdefaults",
   "coverage",
   "isort",
-  "git+https://github.com/realshouzy/msaccessdb",
+  "msaccessdb@git+https://github.com/realshouzy/msaccessdb",
   "mypy",
   "pre-commit",
   "pylint",
@@ -151,3 +151,4 @@ exclude_also = [
   "except Exception as exception:",
   "if self._connection is None:",
 ]
+fail_under = 95

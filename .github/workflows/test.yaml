@@ -22,8 +22,7 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install -U pip setuptools wheel
-        pip install .
-        pip install pytest coverage covdefaults
+        pip install .[dev]
     - name: Test the code with pytest and coverage
       run: |
         coverage erase

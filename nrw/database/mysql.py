@@ -22,7 +22,7 @@ class DatabaseConnector:
     anschließend SQL-Anweisungen an diese Datenbank gerichtet werden können.
     """
 
-    # pylint: disable=W0613, W0718, R0913
+    # pylint: disable=W0718, R0913
 
     __slots__: Final[tuple[str, str, str]] = (
         "_connection",

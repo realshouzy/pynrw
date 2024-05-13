@@ -5,10 +5,14 @@ from __future__ import annotations
 from typing import TYPE_CHECKING, Iterator
 
 import msaccessdb
-import pyodbc  # type: ignore[import-not-found]
 import pytest
 
-from nrw.database.msaccess import DatabaseConnector
+try:
+    import pyodbc  # type: ignore[import-not-found]
+
+    from nrw.database.msaccess import DatabaseConnector
+except ImportError:
+    pytest.skip(reason="pyodbc unavailable", allow_module_level=True)
 
 if TYPE_CHECKING:
     from pathlib import Path

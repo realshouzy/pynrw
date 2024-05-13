@@ -24,7 +24,7 @@ class DatabaseConnector:
         "_message",
     )
 
-    # pylint: disable=W0613, W0718
+    # pylint: disable=W0613, W0718, R0913
 
     def __init__(
         self,
