@@ -53,6 +53,8 @@ print(sorted_lst)  # List(0 -> 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> 9)
 
 ## Dokumentation
 
+### Datenstrukturen
+
 Dieses Package implementiert die Datenstrukturen nach den Vorgaben des Landes NRW in Python, zu finden in [`nrw.datastructures`](/nrw/datastructures/), d.s.:
 
 - [`List`](/nrw/datastructures/_list.py)
@@ -96,6 +98,8 @@ Des weiteren sind (triviale) Optimierungen vorgenommen worden:
 - redundante Aufrufe werden weggelassen
 - interne Optimierungen bei Zuweisungen
 
+### Algorithmen
+
 Zusätzlich enthält dieses Package nützliche Funktionen zum Sortieren, Suchen und Traversiern, zu finden in [`nrw.algorithms`](/nrw/algorithms/):
 
 - [`linear_search`](/nrw/algorithms/_searching.py)
@@ -112,15 +116,36 @@ Zusätzlich enthält dieses Package nützliche Funktionen zum Sortieren, Suchen 
 - [`postorder`](/nrw/algorithms/_traversal.py)
 - [`levelorder`](/nrw/algorithms/_traversal.py)
 
-Allerdings muss annotiert werden, dass aufgrund der Vorgaben des Landes die Laufzeiten nicht optimal sind. Zudem kann es zu ungewollten Nebeneffekte kommen. Welche dies sind, wird dem Leser als Übung überlassen. Es soll nicht vor einem Blick in den Quellcode zurückgeschreckt werden.
+Allerdings muss annotiert werden, dass aufgrund der Vorgaben des Landes die Laufzeiten nicht optimal sind. Zudem kann es zu ungewollten Nebeneffekte kommen. Welche dies sind, wird dem Leser als Übung überlassen.
 
-Für Hilfe zum jeweiligen Objekt (gilt für alle oben genannte Objekte), z.B.:
+### Datenbankklassen
+
+Analog zu den Datenstrukturen sind auch Datenbankklassen größtenteils semantisch identisch zur den Vorgaben des Landes.
+Die jeweiligen Klassen sind in [`nrw.database`](/nrw/database/) definiert:
+
+- [`sqlite.DatabaseConnector`](/nrw/database/sqlite.py)
+- [`mysql.DatabaseConnector`](/nrw/database/mysql.py)
+- [`msaccess.DatabaseConnector`](/nrw/database/msaccess.py)
+- [`QueryResult`](/nrw/database/_query_result.py)
+
+Hierbei ist zu beachten, dass der `DatabaseConnector` für MSAccess den Microsoft Access Driver benötigt und passwortgeschützte Datenbanken nicht unterstüzt.
+Des weiteren gilt für `QueryResult`, dass die Daten und die Spaltentypen nicht unbedingt als String wiedergegeben werden. Die Daten werden als Python-Äquivalenten Datentypen wiedergegeben, und für die Spaltentypen gilt:
+
+- SQLite: immer `None`, da SQLite dynamisch typisiert ist
+- MySQL: die entsprechenden Datentypen von MySQL als String
+- MSAccess: die entsprechenden Datentypen (Klassen) von Python
+
+### Allgemein
+
+Für mehr Information zu einem beliebigen Objekt kann `help` genutzt werden, z.B.:
 
 ```python
 from nrw.datastructures import List
 help(List)
 help(List.insert)
 ```
+
+**Es soll nicht vor einem Blick in den Quellcode zurückgeschreckt werden.**
 
 ## Motivation
 
