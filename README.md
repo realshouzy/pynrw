@@ -13,7 +13,7 @@
 [![Style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![Imports: isort](https://img.shields.io/badge/%20imports-isort-%231674b1?style=flat&labelColor=ef8336)](https://pycqa.github.io/isort/)
 
-This package implements the datastructures given by the German state NRW in Python, thus futher documentation will be in German. This code is purely intended for educational purposes and should not be used in production!
+This package implements the datastructures and database classes given by the German state NRW in Python, thus futher documentation will be in German. This code is purely intended for educational purposes and should not be used in production!
 
 **Dieses Package dient alleine zu Bildungszwecken und sollte nicht in Produktion genutzt werden!**
 
@@ -26,7 +26,7 @@ pip install pynrw
 Alternativ:
 
 ```bash
-pip install git+https://github.com/realshouzy/pynrw.git
+pip install git+https://github.com/realshouzy/pynrw
 ```
 
 ## Beispiel
@@ -102,20 +102,20 @@ Des weiteren sind (triviale) Optimierungen vorgenommen worden:
 
 Zusätzlich enthält dieses Package nützliche Funktionen zum Sortieren, Suchen und Traversiern, zu finden in [`nrw.algorithms`](/nrw/algorithms/):
 
-- [`linear_search`](/nrw/algorithms/_searching.py)
-- [`depth_first_search`](/nrw/algorithms/_searching.py)
-- [`breadth_first_search`](/nrw/algorithms/_searching.py)
-- [`bubble_sort`](/nrw/algorithms/_sorting.py)
-- [`selection_sort`](/nrw/algorithms/_sorting.py)
-- [`insertion_sort`](/nrw/algorithms/_sorting.py)
-- [`merge_sort`](/nrw/algorithms/_sorting.py)
-- [`quick_sort`](/nrw/algorithms/_sorting.py)
-- [`preorder`](/nrw/algorithms/_traversal.py)
-- [`inorder`](/nrw/algorithms/_traversal.py)
-- [`reverse_inorder`](/nrw/algorithms/_traversal.py)
-- [`postorder`](/nrw/algorithms/_traversal.py)
-- [`levelorder`](/nrw/algorithms/_traversal.py)
+- [`linear_search`](/nrw/algorithms/_searching.py#L23)
+- [`depth_first_search`](/nrw/algorithms/_searching.py#L55)
+- [`breadth_first_search`](/nrw/algorithms/_searching.py#L64)
+- [`bubble_sort`](/nrw/algorithms/_sorting.py#L21)
+- [`selection_sort`](/nrw/algorithms/_sorting.py#L37)
+- [`insertion_sort`](/nrw/algorithms/_sorting.py#L67)
+- [`merge_sort`](/nrw/algorithms/_sorting.py#L86)
+- [`quick_sort`](/nrw/algorithms/_sorting.py#L141)
+- [`preorder`](/nrw/algorithms/_traversal.py#L19)
+- [`inorder`](/nrw/algorithms/_traversal.py#L41)
+- [`postorder`](/nrw/algorithms/_traversal.py#L63)
+- [`levelorder`](/nrw/algorithms/_traversal.py#L85)
 
+Die verschiedenen Traversierungen unterstützen auch Umkehrung.
 Allerdings muss annotiert werden, dass aufgrund der Vorgaben des Landes die Laufzeiten nicht optimal sind. Zudem kann es zu ungewollten Nebeneffekte kommen. Welche dies sind, wird dem Leser als Übung überlassen.
 
 ### Datenbankklassen
