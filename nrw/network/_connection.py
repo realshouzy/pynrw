@@ -42,7 +42,7 @@ class Connection:
 
     def receive(self) -> str | None:
         if self._from_server is not None:
-            with suppress(Exception):
+            with suppress(IOError):
                 return self._from_server.readline()
         return None
 
@@ -53,7 +53,7 @@ class Connection:
 
     def close(self) -> None:
         if self._socket is not None:
-            with suppress(Exception):
+            with suppress(IOError):
                 self._to_server.close()
                 self._from_server.close()
                 self._socket.shutdown(socket.SHUT_RDWR)
