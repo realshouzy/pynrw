@@ -13,7 +13,6 @@ __all__: Final[tuple[str, ...]] = (
     "quick_sort",
     "preorder",
     "inorder",
-    "reverse_inorder",
     "postorder",
     "levelorder",
 )
@@ -32,10 +31,4 @@ from nrw.algorithms._sorting import (
     quick_sort,
     selection_sort,
 )
-from nrw.algorithms._traversal import (
-    inorder,
-    levelorder,
-    postorder,
-    preorder,
-    reverse_inorder,
-)
+from nrw.algorithms._traversal import inorder, levelorder, postorder, preorder

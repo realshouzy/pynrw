@@ -2,11 +2,11 @@
 """Tests for `datastructures._traversal`."""
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Callable, Iterator
+from typing import TYPE_CHECKING, Iterator, Protocol
 
 import pytest
 
-from nrw.algorithms import inorder, levelorder, postorder, preorder, reverse_inorder
+from nrw.algorithms import inorder, levelorder, postorder, preorder
 from nrw.datastructures import BinarySearchTree, BinaryTree
 
 if TYPE_CHECKING:
@@ -31,21 +31,43 @@ def binary_tree() -> BinaryTree[int]:
     return tree
 
 
+class Traverser(Protocol):
+    """Unnecessary protocol because `Callable` cannot express complex signatures."""
+
+    def __call__(
+        self,
+        tree: BinaryTree[int] | BinarySearchTree[int],
+        *,
+        reverse: bool = False,
+    ) -> List[int]: ...
+
+
 @pytest.mark.parametrize("empty_tree", [BinaryTree[int](), BinarySearchTree[int]()])
 @pytest.mark.parametrize(
     "traverse",
-    [inorder, postorder, preorder, reverse_inorder, levelorder],
+    [inorder, postorder, preorder, levelorder],
 )
 def test_traversal_on_empty_tree(
     empty_tree: BinaryTree[int] | BinarySearchTree[int],
-    traverse: Callable[[BinaryTree[int] | BinarySearchTree[int]], List[int]],
+    traverse: Traverser,
 ) -> None:
     assert traverse(empty_tree).is_empty
+    assert traverse(empty_tree, reverse=True).is_empty
 
 
 def test_inorder_traversal_on_binary_tree(binary_tree: BinaryTree[int]) -> None:
     expected_result: Iterator[int] = iter((0, 1, 2))
     result: List[int] = inorder(binary_tree)
+
+    result.to_first()
+    while result.has_access:
+        assert result.content == next(expected_result)
+        result.next()
+
+
+def test_reverse_inorder_traversal_on_binary_tree(binary_tree: BinaryTree[int]) -> None:
+    expected_result: Iterator[int] = iter((2, 1, 0))
+    result: List[int] = inorder(binary_tree, reverse=True)
 
     result.to_first()
     while result.has_access:
@@ -63,6 +85,18 @@ def test_postorder_traversal_on_binary_tree(binary_tree: BinaryTree[int]) -> Non
         result.next()
 
 
+def test_reverse_postorder_traversal_on_binary_tree(
+    binary_tree: BinaryTree[int],
+) -> None:
+    expected_result: Iterator[int] = iter((2, 0, 1))
+    result: List[int] = postorder(binary_tree, reverse=True)
+
+    result.to_first()
+    while result.has_access:
+        assert result.content == next(expected_result)
+        result.next()
+
+
 def test_preorder_traversal_on_binary_tree(binary_tree: BinaryTree[int]) -> None:
     expected_result: Iterator[int] = iter((1, 0, 2))
     result: List[int] = preorder(binary_tree)
@@ -73,9 +107,11 @@ def test_preorder_traversal_on_binary_tree(binary_tree: BinaryTree[int]) -> None
         result.next()
 
 
-def test_reverse_inorder_traversal_on_binary_tree(binary_tree: BinaryTree[int]) -> None:
-    expected_result: Iterator[int] = iter((2, 1, 0))
-    result: List[int] = reverse_inorder(binary_tree)
+def test_reverse_preorder_traversal_on_binary_tree(
+    binary_tree: BinaryTree[int],
+) -> None:
+    expected_result: Iterator[int] = iter((1, 2, 0))
+    result: List[int] = preorder(binary_tree, reverse=True)
 
     result.to_first()
     while result.has_access:
@@ -93,9 +129,33 @@ def test_levelorder_traversal_on_binary_tree(binary_tree: BinaryTree[int]) -> No
         result.next()
 
 
+def test_reverse_levelorder_traversal_on_binary_tree(
+    binary_tree: BinaryTree[int],
+) -> None:
+    expected_result: Iterator[int] = iter((1, 2, 0))
+    result: List[int] = levelorder(binary_tree, reverse=True)
+
+    result.to_first()
+    while result.has_access:
+        assert result.content == next(expected_result)
+        result.next()
+
+
 def test_inorder_traversal_on_binary_search_tree(bst: BinarySearchTree[int]) -> None:
     expected_result: Iterator[int] = iter((0, 1, 2))
     result: List[int] = inorder(bst)
+
+    result.to_first()
+    while result.has_access:
+        assert result.content == next(expected_result)
+        result.next()
+
+
+def test_reverse_inorder_traversal_on_binary_search_tree(
+    bst: BinarySearchTree[int],
+) -> None:
+    expected_result: Iterator[int] = iter((2, 1, 0))
+    result: List[int] = inorder(bst, reverse=True)
 
     result.to_first()
     while result.has_access:
@@ -113,6 +173,18 @@ def test_postorder_traversal_on_binary_search_tree(bst: BinarySearchTree[int]) -
         result.next()
 
 
+def test_reverse_postorder_traversal_on_binary_search_tree(
+    bst: BinarySearchTree[int],
+) -> None:
+    expected_result: Iterator[int] = iter((2, 0, 1))
+    result: List[int] = postorder(bst, reverse=True)
+
+    result.to_first()
+    while result.has_access:
+        assert result.content == next(expected_result)
+        result.next()
+
+
 def test_preorder_traversal_on_binary_search_tree(bst: BinarySearchTree[int]) -> None:
     expected_result: Iterator[int] = iter((1, 0, 2))
     result: List[int] = preorder(bst)
@@ -123,11 +195,11 @@ def test_preorder_traversal_on_binary_search_tree(bst: BinarySearchTree[int]) ->
         result.next()
 
 
-def test_reverse_inorder_traversal_on_binary_search_tree(
+def test_reverse_preorder_traversal_on_binary_search_tree(
     bst: BinarySearchTree[int],
 ) -> None:
-    expected_result: Iterator[int] = iter((2, 1, 0))
-    result: List[int] = reverse_inorder(bst)
+    expected_result: Iterator[int] = iter((1, 2, 0))
+    result: List[int] = preorder(bst, reverse=True)
 
     result.to_first()
     while result.has_access:
@@ -140,6 +212,18 @@ def test_levelorder_traversal_on_binary_search_tree(
 ) -> None:
     expected_result: Iterator[int] = iter((1, 0, 2))
     result: List[int] = levelorder(bst)
+
+    result.to_first()
+    while result.has_access:
+        assert result.content == next(expected_result)
+        result.next()
+
+
+def test_reverse_levelorder_traversal_on_binary_search_tree(
+    bst: BinarySearchTree[int],
+) -> None:
+    expected_result: Iterator[int] = iter((1, 2, 0))
+    result: List[int] = levelorder(bst, reverse=True)
 
     result.to_first()
     while result.has_access:

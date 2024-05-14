@@ -119,7 +119,7 @@ target-version = "py312"
 line-length = 88
 
 [tool.ruff.lint.extend-per-file-ignores]
-"./tests/*_test.py" = ["SLF001", "D100", "D103", "PLR2004"]
+"./tests/*_test.py" = ["SLF001", "D100", "D103", "PLR2004", "D102"]
 "./tests/*.py" = ["D104"]
 "./nrw/database/*.py" = ["BLE001", "PLR0913", "ARG002"]
 "./nrw/database/*.pyi" = ["PLR0913"]
