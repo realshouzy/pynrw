@@ -33,12 +33,6 @@ Otherwise you could also use [``virtualenv``](https://virtualenv.pypa.io/en/late
 To install all the tools, plugins and other dependencies used for development and ``pynrw``, run this:
 
 ```bash
-pip install -e .[dev]
-```
-
-Alternatively, all the these can also be found in and installed via [``requirements-dev.txt``](/requirements-dev.txt); run this:
-
-```bash
 pip install -r requirements-dev.txt
 ```
 

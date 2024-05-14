@@ -22,7 +22,7 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install -U pip setuptools wheel
-        pip install .[dev]
+        pip install -r requirements-dev.txt
     - name: Test the code with pytest and coverage
       run: |
         coverage erase
