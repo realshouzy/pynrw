@@ -105,6 +105,7 @@ line-length = 88
 "./tests/*.py" = ["D104"]
 "./nrw/database/*.py" = ["BLE001", "PLR0913", "ARG002"]
 "./nrw/database/*.pyi" = ["PLR0913"]
+"./nrw/network/*.py" = ["BLE001"]
 
 [tool.ruff.lint.isort]
 known-first-party = ["nrw"]
