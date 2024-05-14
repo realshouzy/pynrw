@@ -1,3 +1,4 @@
+# pylint: skip-file
 __all__: Final[tuple[str]] = ("DatabaseConnector",)
 
 from typing import Final

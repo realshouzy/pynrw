@@ -1,3 +1,4 @@
+# pylint: skip-file
 __all__: Final[tuple[str, ...]] = (
     "Stack",
     "Queue",

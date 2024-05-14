@@ -17,7 +17,10 @@ def test_database_connector() -> None:
     assert db.current_query_result is None
 
     db.execute_statement("drop table test;")
-    assert db.error_message is None or "Unknown table 'test.test'" in db.error_message
+    assert (
+        db.error_message is None
+        or "Unknown table 'test.test'" in db.error_message  # pylint: disable=E1135
+    )
     assert db.current_query_result is None
 
     db.execute_statement("create table test (a Int, b Text, c Text);")
