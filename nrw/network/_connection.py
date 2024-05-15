@@ -33,8 +33,14 @@ class Connection:
                 socket.SOCK_STREAM,
             )
             self._socket.connect((server_ip, server_port))
-            self._to_server: TextIOWrapper | None = self._socket.makefile(mode="w")
-            self._from_server: TextIOWrapper | None = self._socket.makefile(mode="r")
+            self._to_server: TextIOWrapper | None = self._socket.makefile(
+                mode="w",
+                encoding="utf-8",
+            )
+            self._from_server: TextIOWrapper | None = self._socket.makefile(
+                mode="r",
+                encoding="utf-8",
+            )
         except Exception:  # pylint: disable=W0718
             self._socket = None
             self._to_server = None
@@ -42,14 +48,15 @@ class Connection:
 
     def receive(self) -> str | None:
         if self._from_server is not None:
-            with suppress(IOError):
+            with suppress(IOError, ValueError):
                 return self._from_server.readline()
         return None
 
     def send(self, message: str) -> None:
         if self._to_server is not None:
-            self._to_server.write(f"{message}\n")
-            self._to_server.flush()
+            with suppress(ValueError):
+                self._to_server.write(f"{message}\n")
+                self._to_server.flush()
 
     def close(self) -> None:
         if self._socket is not None:
