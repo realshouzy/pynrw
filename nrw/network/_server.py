@@ -3,12 +3,18 @@ from __future__ import annotations
 __all__: Final[tuple[str]] = ("Server",)
 
 import socket
+import sys
 import threading
 from abc import ABC, abstractmethod
 from contextlib import suppress
-from typing import TYPE_CHECKING, Final, override
+from typing import TYPE_CHECKING, Final
 
 from nrw.datastructures import List
+
+if sys.version_info >= (3, 12):  # pragma: >=3.12 cover
+    from typing import override
+else:  # pragma: <3.12 cover
+    from typing_extensions import override
 
 if TYPE_CHECKING:
     from io import TextIOWrapper
