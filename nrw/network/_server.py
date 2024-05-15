@@ -124,8 +124,8 @@ class _ClientMessageHandler(threading.Thread):
         self._active: bool = False
         self._socket_wrapper: _ClientSocketWrapper = _ClientSocketWrapper(client_socket)
         if client_socket is not None:
-            self.start()
             self._active = True
+            self.start()
 
     @override
     def run(self) -> None:
