@@ -22,7 +22,8 @@ class Client(ABC):
     def process_message(self, message: str) -> None: ...
 
 class Server(ABC):
-    __slots__: Final[tuple[str, str, str]] = (
+    __slots__: Final[tuple[str, str, str, str]] = (
+        "__weakref__",
         "_connection_handler",
         "_message_handlers",
         "_lock",

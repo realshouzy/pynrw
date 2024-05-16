@@ -5,6 +5,7 @@ __all__: Final[tuple[str]] = ("Server",)
 import socket
 import sys
 import threading
+import weakref
 from abc import ABC, abstractmethod
 from contextlib import suppress
 from typing import TYPE_CHECKING, Final
@@ -29,7 +30,7 @@ class _NewConnectionHandler(threading.Thread):
         server: Server,
     ) -> None:
         super().__init__()
-        self._server: Server = server
+        self._server: weakref.ProxyType[Server] = weakref.proxy(server)
         self._active = False
         self._server_socket: socket.socket | None = None
         with suppress(Exception):
@@ -47,9 +48,14 @@ class _NewConnectionHandler(threading.Thread):
     def run(self) -> None:
         while self._active:
             with suppress(OSError):
-                client_socket, (client_ip, client_port) = self._server_socket.accept()
-                self._server._add_new_client_message_handler(client_socket)
-                self._server.process_new_connection(client_ip, client_port)
+                try:
+                    client_socket, (client_ip, client_port) = (
+                        self._server_socket.accept()
+                    )
+                    self._server._add_new_client_message_handler(client_socket)
+                    self._server.process_new_connection(client_ip, client_port)
+                except ReferenceError:  # pragma: no cover
+                    self.close()
 
     def close(self) -> None:
         self._active = False
@@ -98,13 +104,19 @@ class _ClientSocketWrapper:
     def client_ip(self) -> str | None:
         if self._client_socket is None:
             return None
-        return self._client_socket.getpeername()[0]  # type: ignore[no-any-return]
+        try:
+            return self._client_socket.getpeername()[0]  # type: ignore[no-any-return]
+        except OSError:
+            return None
 
     @property
     def client_port(self) -> int:
         if self._client_socket is None:
             return 0
-        return self._client_socket.getpeername()[1]  # type: ignore[no-any-return]
+        try:
+            return self._client_socket.getpeername()[1]  # type: ignore[no-any-return]
+        except OSError:
+            return 0
 
     def close(self) -> None:
         if self._client_socket is not None:
@@ -120,7 +132,7 @@ class _ClientMessageHandler(threading.Thread):
 
     def __init__(self, client_socket: socket.socket | None, server: Server) -> None:
         super().__init__()
-        self._server: Server = server
+        self._server: weakref.ProxyType[Server] = weakref.proxy(server)
         self._active: bool = False
         self._socket_wrapper: _ClientSocketWrapper = _ClientSocketWrapper(client_socket)
         if client_socket is not None:
@@ -134,19 +146,22 @@ class _ClientMessageHandler(threading.Thread):
             message = self._socket_wrapper.receive()
             client_ip: str | None = self._socket_wrapper.client_ip
             client_port: int = self._socket_wrapper.client_port
-            if message is not None:
-                self._server.process_message(client_ip, client_port, message)
-            else:
-                message_handler: _ClientMessageHandler | None = (
-                    self._server._find_client_message_handler(
-                        client_ip,
-                        client_port,
+            try:
+                if message is not None:
+                    self._server.process_message(client_ip, client_port, message)
+                else:
+                    message_handler: _ClientMessageHandler | None = (
+                        self._server._find_client_message_handler(
+                            client_ip,
+                            client_port,
+                        )
                     )
-                )
-                if message_handler is not None:
-                    message_handler.close()
-                    self._server._remove_client_message_handler(message_handler)
-                    self._server.process_closing_connection(client_ip, client_port)
+                    if message_handler is not None:
+                        message_handler.close()
+                        self._server._remove_client_message_handler(message_handler)
+                        self._server.process_closing_connection(client_ip, client_port)
+            except ReferenceError:
+                self.close()
 
     def send(self, message: str) -> None:
         if self._active:
@@ -179,7 +194,8 @@ class Server(ABC):
     getrennte Verbindungen können nicht reaktiviert werden.
     """
 
-    __slots__: Final[tuple[str, str, str]] = (
+    __slots__: Final[tuple[str, str, str, str]] = (
+        "__weakref__",
         "_connection_handler",
         "_message_handlers",
         "_lock",
