@@ -30,8 +30,11 @@ class _NewConnectionHandler(threading.Thread):
         server: Server,
     ) -> None:
         super().__init__()
-        self._server: weakref.ProxyType[Server] = weakref.proxy(server)
-        self._active = False
+        self._server: weakref.ProxyType[Server] = weakref.proxy(
+            server,
+            self._on_server_shutdown,
+        )
+        self._active: bool = False
         self._server_socket: socket.socket | None = None
         with suppress(Exception):
             self._server_socket = socket.socket(
@@ -44,6 +47,12 @@ class _NewConnectionHandler(threading.Thread):
             self._active = True
             self.start()
 
+    def _on_server_shutdown(
+        self,
+        server: Server,  # noqa: ARG002 # pylint: disable=W0613
+    ) -> None:
+        self.close()
+
     @override
     def run(self) -> None:
         while self._active:
@@ -54,14 +63,15 @@ class _NewConnectionHandler(threading.Thread):
                     )
                     self._server._add_new_client_message_handler(client_socket)
                     self._server.process_new_connection(client_ip, client_port)
-                except ReferenceError:  # pragma: no cover
+                except ReferenceError:
                     self.close()
 
     def close(self) -> None:
-        self._active = False
-        if self._server_socket is not None:
-            with suppress(OSError):
-                self._server_socket.close()
+        if self._active:
+            self._active = False
+            if self._server_socket is not None:
+                with suppress(OSError):
+                    self._server_socket.close()
 
 
 class _ClientSocketWrapper:
@@ -132,12 +142,21 @@ class _ClientMessageHandler(threading.Thread):
 
     def __init__(self, client_socket: socket.socket | None, server: Server) -> None:
         super().__init__()
-        self._server: weakref.ProxyType[Server] = weakref.proxy(server)
+        self._server: weakref.ProxyType[Server] = weakref.proxy(
+            server,
+            self._on_server_shutdown,
+        )
         self._active: bool = False
         self._socket_wrapper: _ClientSocketWrapper = _ClientSocketWrapper(client_socket)
         if client_socket is not None:
             self._active = True
             self.start()
+
+    def _on_server_shutdown(
+        self,
+        server: Server,  # noqa: ARG002 # pylint: disable=W0613
+    ) -> None:
+        self.close()
 
     @override
     def run(self) -> None:

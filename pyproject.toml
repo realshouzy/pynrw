@@ -93,6 +93,7 @@ lint.ignore = [
   "S101",
   "PYI026",
   "B905",
+  "S311",
 ]
 lint.fixable = ["ALL"]
 lint.unfixable = []
@@ -101,7 +102,7 @@ target-version = "py312"
 line-length = 88
 
 [tool.ruff.lint.extend-per-file-ignores]
-"./tests/*_test.py" = ["SLF001", "D100", "D103", "PLR2004", "D102"]
+"./tests/*_test.py" = ["SLF001", "D100", "D103", "PLR2004", "D102", "D101"]
 "./tests/*.py" = ["D104"]
 "./nrw/database/*.py" = ["BLE001", "PLR0913", "ARG002"]
 "./nrw/database/*.pyi" = ["PLR0913"]
@@ -125,9 +126,10 @@ exclude_dirs = ["tests"]
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 python_files = ["*_test.py"]
+markers = ["networktest: Run network tests"]
 
 [tool.coverage.run]
-omit = ["./tests/*"]
+omit = ["./tests/*", "./nrw/network/*"]
 plugins = ["covdefaults"]
 
 [tool.coverage.report]
