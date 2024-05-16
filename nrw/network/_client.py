@@ -76,13 +76,18 @@ class Client(ABC):
     __slots__: Final[tuple[str, str]] = ("_socket_wrapper", "_active")
 
     def __init__(self, server_ip: str, server_port: int) -> None:
+        """Es wird eine Verbindung zum durch `server_ip` und `server_port`
+        spezifizierten Server aufgebaut, so dass Daten (Zeichenketten) gesendet und
+        empfangen werden können. Kann die Verbindung nicht hergestellt werden, kann der
+        Client nicht zum Datenaustausch verwendet werden.
+        """
         self._socket_wrapper: _SocketWrapper = _SocketWrapper(server_ip, server_port)
         if self._socket_wrapper._socket is not None:
             self._active: bool = True
         else:
             self._active = False
-        thread = threading.Thread(target=self._run)
-        thread.start()
+        message_handler_thread: threading.Thread = threading.Thread(target=self._run)
+        message_handler_thread.start()
 
     def _run(self) -> None:
         message: str | None = None
