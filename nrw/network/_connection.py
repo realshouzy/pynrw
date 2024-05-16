@@ -29,7 +29,7 @@ class Connection:
     def __init__(self, server_ip: str, server_port: int) -> None:
         """Ein Objekt vom Typ `Connection` wird erstellt. Dadurch wird eine Verbindung
         zum durch `server_ip` und `server_port` spezifizierten Server aufgebaut,
-        so dass Daten (Zeichen-ketten) gesendet und empfangen werden können.
+        so dass Daten (Zeichenketten) gesendet und empfangen werden können.
         Kann die Verbindung nicht hergestellt werden, kann die Instanz von Connection
         nicht mehr verwendet werden.
         """
