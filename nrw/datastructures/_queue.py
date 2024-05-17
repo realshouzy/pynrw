@@ -44,7 +44,7 @@ class _QueueNode(Generic[_T]):
 
 class Queue(Generic[_T]):
     """Objekte der generischen Klasse `Queue` (Warteschlange) verwalten beliebige
-    Objekte nach dem First-In-First-Out-Prinzip, d.h., das
+    Objekte nach dem First-In-First-Out-Prinzip, d. h., das
     zuerst abgelegte Objekt wird als erstes wieder entnommen. Alle Methoden haben
     eine konstante Laufzeit, unabhängig von der Anzahl der verwalteten Objekte.
     """

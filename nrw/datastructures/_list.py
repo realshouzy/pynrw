@@ -107,7 +107,7 @@ class List(Generic[_T]):
         """Falls die Liste nicht leer ist, es ein aktuelles Objekt gibt und dieses
         nicht das letzte Objekt der Liste ist, wird das dem aktuellen Objekt in
         der Liste folgende Objekt zum aktuellen Objekt, andernfalls gibt es nach
-        Ausführung des Auftrags kein aktuelles Objekt, d.h. `has_access` liefert
+        Ausführung des Auftrags kein aktuelles Objekt, d. h. `has_access` liefert
         den Wert `False`.
         """
         if not self.has_access:

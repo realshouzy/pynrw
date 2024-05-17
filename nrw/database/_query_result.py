@@ -32,7 +32,7 @@ class QueryResult:
     def data(self) -> list[tuple[Any, ...]]:
         """Die Anfrage liefert die Einträge der Ergebnistabelle als eine `list`
         welche wiederum `tuple` enthält. Der erste Index stellt die Zeile und der zweite
-        die Spalte dar (d.h. Object[zeile][spalte]).
+        die Spalte dar (d. h. Object[zeile][spalte]).
         """
         return self._data
 

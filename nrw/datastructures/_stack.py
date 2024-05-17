@@ -44,7 +44,7 @@ class _StackNode(Generic[_T]):
 
 class Stack(Generic[_T]):
     """Objekte der generischen Klasse `Stack` (Keller, Stapel) verwalten beliebige
-    Objekte nach dem Last-In-First-Out-Prinzip, d.h., das
+    Objekte nach dem Last-In-First-Out-Prinzip, d. h., das
     zuletzt abgelegte Objekt wird als erstes wieder entnommen. Alle Methoden
     haben eine konstante Laufzeit, unabhängig von der Anzahl der verwalteten
     Objekte.
