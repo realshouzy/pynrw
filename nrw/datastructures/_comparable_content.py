@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-__all__: Final[tuple[str, str]] = ("ComparableContent", "ComparableContentT")
+__all__: Final[list[str]] = ["ComparableContent", "ComparableContentT"]
 
 from typing import Any, Final, Protocol, TypeVar, runtime_checkable
 

@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-__all__: Final[tuple[str, ...]] = ("display_binary_node",)
+__all__: Final[list[str]] = ["display_binary_node"]
 
 from typing import TYPE_CHECKING, Final, TypeVar
 

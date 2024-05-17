@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-__all__: Final[tuple[str]] = ("Vertex",)
+__all__: Final[list[str]] = ["Vertex"]
 
 from typing import Final
 

@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-__all__: Final[tuple[str]] = ("DatabaseConnector",)
+__all__: Final[list[str]] = ["DatabaseConnector"]
 
 from typing import Final
 

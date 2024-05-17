@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-__all__: Final[tuple[str]] = ("Queue",)
+__all__: Final[list[str]] = ["Queue"]
 
 from io import StringIO
 from typing import Final, Generic, TypeVar

@@ -1,5 +1,5 @@
 # pylint: skip-file
-__all__: Final[tuple[str, ...]] = (
+__all__: Final[list[str]] = [
     "Stack",
     "Queue",
     "List",
@@ -10,7 +10,7 @@ __all__: Final[tuple[str, ...]] = (
     "Edge",
     "BinarySearchTree",
     "Graph",
-)
+]
 
 from typing import Final, Generic, TypeVar, overload
 

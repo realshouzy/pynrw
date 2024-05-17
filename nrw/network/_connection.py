@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-__all__: Final[tuple[str]] = ("Connection",)
+__all__: Final[list[str]] = ["Connection"]
 
 import socket
 from contextlib import suppress

@@ -1,5 +1,5 @@
 # pylint: skip-file
-__all__: Final[tuple[str]] = ("QueryResult",)
+__all__: Final[list[str]] = ["QueryResult"]
 
 from typing import Any, Final
 

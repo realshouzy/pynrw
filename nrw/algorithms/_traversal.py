@@ -2,13 +2,13 @@
 
 from __future__ import annotations
 
-__all__: Final[tuple[str, ...]] = (
+__all__: Final[list[str]] = [
     "preorder",
     "inorder",
     "postorder",
     "levelorder",
     "reverse_inorder",
-)
+]
 
 from typing import Final, TypeVar
 from warnings import warn

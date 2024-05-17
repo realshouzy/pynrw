@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-__all__: Final[tuple[str]] = ("BinaryTree",)
+__all__: Final[list[str]] = ["BinaryTree"]
 
 from typing import Final, Generic, TypeVar
 

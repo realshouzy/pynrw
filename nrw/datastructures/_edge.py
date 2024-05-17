@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-__all__: Final[tuple[str]] = ("Edge",)
+__all__: Final[list[str]] = ["Edge"]
 
 from typing import TYPE_CHECKING, Final
 

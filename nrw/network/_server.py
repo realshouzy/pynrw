@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-__all__: Final[tuple[str]] = ("Server",)
+__all__: Final[list[str]] = ["Server"]
 
 import socket
 import sys

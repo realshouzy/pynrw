@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+__all__: Final[list[str]] = ["BinarySearchTree"]
+
 from typing import Final, Generic
 
 from nrw.datastructures._comparable_content import ComparableContentT

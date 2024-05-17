@@ -2,13 +2,13 @@
 
 from __future__ import annotations
 
-__all__: Final[tuple[str, ...]] = (
+__all__: Final[list[str]] = [
     "bubble_sort",
     "selection_sort",
     "insertion_sort",
     "merge_sort",
     "quick_sort",
-)
+]
 
 from typing import TYPE_CHECKING, Final
 

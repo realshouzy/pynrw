@@ -1,5 +1,5 @@
 # pylint: skip-file
-__all__: Final[tuple[str, str, str]] = ("Connection", "Client", "Server")
+__all__: Final[list[str]] = ["Connection", "Client", "Server"]
 
 from abc import ABC, abstractmethod
 from typing import Final
