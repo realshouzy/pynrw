@@ -135,6 +135,16 @@ Des weiteren gilt für `QueryResult`, dass die Daten und die Spaltentypen nicht 
 - MySQL: die entsprechenden Datentypen von MySQL als String
 - MSAccess: die entsprechenden Datentypen (Klassen) von Python
 
+### Netzklassen
+
+Die Netzklassen sind ebenfalls semantisch identisch zu den Netzklassen des Landes. Diese sind in [`nrw.network`](/nrw/network/) zu definiert:
+
+- [`Connection`](/nrw/network/_connection.py)
+- [`Client`](/nrw/network/_client.py)
+- [`Server`](/nrw/network/_server.py)
+
+Die letzteren beiden sind [`ABCs`](https://docs.python.org/3/library/abc.html). Bei diesen weicht die interne Implementation von der Java Implementation des Landes ab, da deren Ansatz nicht eins-zu-eins in Python übertragen werden kann; somit ist der Quellcode für Fortgeschrittene. Nichtsdestotrotz ist die Anwendung und der Funktionsumfang der Selbe wie vom Land.
+
 ### Allgemein
 
 Für mehr Information zu einem beliebigen Objekt kann `help` genutzt werden, z.B.:

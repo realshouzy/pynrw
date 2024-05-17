@@ -72,6 +72,15 @@ To only run a specific test run:
 pytest -k test_name_of_the_test
 ```
 
+##### Annotation
+
+Note that the tests for the network classes may be unstable, because of threading. Therefore they are omitted from `tox` and the [`Test`](/.github/workflows/test.yaml) workflow using `pytest` markers.
+To do the same when running `pytest` directly, run:
+
+```bash
+pytest -m "not networktest"
+```
+
 #### Code linting
 
 The linting and formatting is done using ``pre-commit``, thus run:
