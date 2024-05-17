@@ -1,4 +1,4 @@
 # TODO
 
 - [x] Implement database classes
-- [ ] Implement network classes
+- [x] Implement network classes
