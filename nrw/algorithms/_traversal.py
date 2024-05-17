@@ -30,12 +30,12 @@ def preorder(
 
     if not reverse:
         result.append(tree.content)
-        result.concat(preorder(tree.left_tree))
-        result.concat(preorder(tree.right_tree))
+        result.concat(preorder(tree.left_tree, reverse=reverse))
+        result.concat(preorder(tree.right_tree, reverse=reverse))
     else:
         result.append(tree.content)
-        result.concat(preorder(tree.right_tree))
-        result.concat(preorder(tree.left_tree))
+        result.concat(preorder(tree.right_tree, reverse=reverse))
+        result.concat(preorder(tree.left_tree, reverse=reverse))
 
     return result
 
@@ -51,13 +51,13 @@ def inorder(
         return result
 
     if not reverse:
-        result.concat(preorder(tree.left_tree))
+        result.concat(inorder(tree.left_tree, reverse=reverse))
         result.append(tree.content)
-        result.concat(preorder(tree.right_tree))
+        result.concat(inorder(tree.right_tree, reverse=reverse))
     else:
-        result.concat(preorder(tree.right_tree))
+        result.concat(inorder(tree.right_tree, reverse=reverse))
         result.append(tree.content)
-        result.concat(preorder(tree.left_tree))
+        result.concat(inorder(tree.left_tree, reverse=reverse))
 
     return result
 
@@ -80,12 +80,12 @@ def postorder(
         return result
 
     if not reverse:
-        result.concat(preorder(tree.left_tree))
-        result.concat(preorder(tree.right_tree))
+        result.concat(postorder(tree.left_tree, reverse=reverse))
+        result.concat(postorder(tree.right_tree, reverse=reverse))
         result.append(tree.content)
     else:
-        result.concat(preorder(tree.right_tree))
-        result.concat(preorder(tree.left_tree))
+        result.concat(postorder(tree.right_tree, reverse=reverse))
+        result.concat(postorder(tree.left_tree, reverse=reverse))
         result.append(tree.content)
 
     return result

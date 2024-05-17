@@ -2,7 +2,7 @@
 """Tests for `datastructures._traversal`."""
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Iterator, Protocol
+from typing import TYPE_CHECKING, Final, Iterator, Protocol
 
 import pytest
 
@@ -16,19 +16,35 @@ if TYPE_CHECKING:
 @pytest.fixture()
 def bst() -> BinarySearchTree[int]:
     tree: BinarySearchTree[int] = BinarySearchTree()
-    tree.insert(1)
-    tree.insert(0)
+    tree.insert(5)
+    tree.insert(6)
+    tree.insert(3)
+    tree.insert(4)
     tree.insert(2)
+    tree.insert(1)
     return tree
 
 
 @pytest.fixture()
 def binary_tree() -> BinaryTree[int]:
     tree: BinaryTree[int] = BinaryTree()
-    tree.content = 1
-    tree.left_tree.content = 0
-    tree.right_tree.content = 2
+    tree.content = 5
+    tree.left_tree.content = 3
+    tree.left_tree.left_tree.content = 2
+    tree.left_tree.left_tree.left_tree.content = 1
+    tree.left_tree.right_tree.content = 4
+    tree.right_tree.content = 6
     return tree
+
+
+INORDER: Final[tuple[int, ...]] = (1, 2, 3, 4, 5, 6)
+REVERSE_INORDER: Final[tuple[int, ...]] = (6, 5, 4, 3, 2, 1)
+POSTORDER: Final[tuple[int, ...]] = (1, 2, 4, 3, 6, 5)
+REVERSE_POSTORDER: Final[tuple[int, ...]] = (6, 4, 1, 2, 3, 5)
+PREORDER: Final[tuple[int, ...]] = (5, 3, 2, 1, 4, 6)
+REVERSE_PREORDER: Final[tuple[int, ...]] = (5, 6, 3, 4, 2, 1)
+LEVELORDER: Final[tuple[int, ...]] = (5, 3, 6, 2, 4, 1)
+REVERSE_LEVELORDER: Final[tuple[int, ...]] = (5, 6, 3, 4, 2, 1)
 
 
 class Traverser(Protocol):
@@ -56,7 +72,7 @@ def test_traversal_on_empty_tree(
 
 
 def test_inorder_traversal_on_binary_tree(binary_tree: BinaryTree[int]) -> None:
-    expected_result: Iterator[int] = iter((0, 1, 2))
+    expected_result: Iterator[int] = iter(INORDER)
     result: List[int] = inorder(binary_tree)
 
     result.to_first()
@@ -66,7 +82,7 @@ def test_inorder_traversal_on_binary_tree(binary_tree: BinaryTree[int]) -> None:
 
 
 def test_reverse_inorder_traversal_on_binary_tree(binary_tree: BinaryTree[int]) -> None:
-    expected_result: Iterator[int] = iter((2, 1, 0))
+    expected_result: Iterator[int] = iter(REVERSE_INORDER)
     result: List[int] = inorder(binary_tree, reverse=True)
 
     result.to_first()
@@ -76,7 +92,7 @@ def test_reverse_inorder_traversal_on_binary_tree(binary_tree: BinaryTree[int]) 
 
 
 def test_postorder_traversal_on_binary_tree(binary_tree: BinaryTree[int]) -> None:
-    expected_result: Iterator[int] = iter((0, 2, 1))
+    expected_result: Iterator[int] = iter(POSTORDER)
     result: List[int] = postorder(binary_tree)
 
     result.to_first()
@@ -88,7 +104,7 @@ def test_postorder_traversal_on_binary_tree(binary_tree: BinaryTree[int]) -> Non
 def test_reverse_postorder_traversal_on_binary_tree(
     binary_tree: BinaryTree[int],
 ) -> None:
-    expected_result: Iterator[int] = iter((2, 0, 1))
+    expected_result: Iterator[int] = iter(REVERSE_POSTORDER)
     result: List[int] = postorder(binary_tree, reverse=True)
 
     result.to_first()
@@ -98,7 +114,7 @@ def test_reverse_postorder_traversal_on_binary_tree(
 
 
 def test_preorder_traversal_on_binary_tree(binary_tree: BinaryTree[int]) -> None:
-    expected_result: Iterator[int] = iter((1, 0, 2))
+    expected_result: Iterator[int] = iter(PREORDER)
     result: List[int] = preorder(binary_tree)
 
     result.to_first()
@@ -110,7 +126,7 @@ def test_preorder_traversal_on_binary_tree(binary_tree: BinaryTree[int]) -> None
 def test_reverse_preorder_traversal_on_binary_tree(
     binary_tree: BinaryTree[int],
 ) -> None:
-    expected_result: Iterator[int] = iter((1, 2, 0))
+    expected_result: Iterator[int] = iter(REVERSE_PREORDER)
     result: List[int] = preorder(binary_tree, reverse=True)
 
     result.to_first()
@@ -120,7 +136,7 @@ def test_reverse_preorder_traversal_on_binary_tree(
 
 
 def test_levelorder_traversal_on_binary_tree(binary_tree: BinaryTree[int]) -> None:
-    expected_result: Iterator[int] = iter((1, 0, 2))
+    expected_result: Iterator[int] = iter(LEVELORDER)
     result: List[int] = levelorder(binary_tree)
 
     result.to_first()
@@ -132,7 +148,7 @@ def test_levelorder_traversal_on_binary_tree(binary_tree: BinaryTree[int]) -> No
 def test_reverse_levelorder_traversal_on_binary_tree(
     binary_tree: BinaryTree[int],
 ) -> None:
-    expected_result: Iterator[int] = iter((1, 2, 0))
+    expected_result: Iterator[int] = iter(REVERSE_LEVELORDER)
     result: List[int] = levelorder(binary_tree, reverse=True)
 
     result.to_first()
@@ -142,7 +158,7 @@ def test_reverse_levelorder_traversal_on_binary_tree(
 
 
 def test_inorder_traversal_on_binary_search_tree(bst: BinarySearchTree[int]) -> None:
-    expected_result: Iterator[int] = iter((0, 1, 2))
+    expected_result: Iterator[int] = iter(INORDER)
     result: List[int] = inorder(bst)
 
     result.to_first()
@@ -154,7 +170,7 @@ def test_inorder_traversal_on_binary_search_tree(bst: BinarySearchTree[int]) -> 
 def test_reverse_inorder_traversal_on_binary_search_tree(
     bst: BinarySearchTree[int],
 ) -> None:
-    expected_result: Iterator[int] = iter((2, 1, 0))
+    expected_result: Iterator[int] = iter(REVERSE_INORDER)
     result: List[int] = inorder(bst, reverse=True)
 
     result.to_first()
@@ -164,7 +180,7 @@ def test_reverse_inorder_traversal_on_binary_search_tree(
 
 
 def test_postorder_traversal_on_binary_search_tree(bst: BinarySearchTree[int]) -> None:
-    expected_result: Iterator[int] = iter((0, 2, 1))
+    expected_result: Iterator[int] = iter(POSTORDER)
     result: List[int] = postorder(bst)
 
     result.to_first()
@@ -176,7 +192,7 @@ def test_postorder_traversal_on_binary_search_tree(bst: BinarySearchTree[int]) -
 def test_reverse_postorder_traversal_on_binary_search_tree(
     bst: BinarySearchTree[int],
 ) -> None:
-    expected_result: Iterator[int] = iter((2, 0, 1))
+    expected_result: Iterator[int] = iter(REVERSE_POSTORDER)
     result: List[int] = postorder(bst, reverse=True)
 
     result.to_first()
@@ -186,7 +202,7 @@ def test_reverse_postorder_traversal_on_binary_search_tree(
 
 
 def test_preorder_traversal_on_binary_search_tree(bst: BinarySearchTree[int]) -> None:
-    expected_result: Iterator[int] = iter((1, 0, 2))
+    expected_result: Iterator[int] = iter(PREORDER)
     result: List[int] = preorder(bst)
 
     result.to_first()
@@ -198,7 +214,7 @@ def test_preorder_traversal_on_binary_search_tree(bst: BinarySearchTree[int]) ->
 def test_reverse_preorder_traversal_on_binary_search_tree(
     bst: BinarySearchTree[int],
 ) -> None:
-    expected_result: Iterator[int] = iter((1, 2, 0))
+    expected_result: Iterator[int] = iter(REVERSE_PREORDER)
     result: List[int] = preorder(bst, reverse=True)
 
     result.to_first()
@@ -210,7 +226,7 @@ def test_reverse_preorder_traversal_on_binary_search_tree(
 def test_levelorder_traversal_on_binary_search_tree(
     bst: BinarySearchTree[int],
 ) -> None:
-    expected_result: Iterator[int] = iter((1, 0, 2))
+    expected_result: Iterator[int] = iter(LEVELORDER)
     result: List[int] = levelorder(bst)
 
     result.to_first()
@@ -222,7 +238,7 @@ def test_levelorder_traversal_on_binary_search_tree(
 def test_reverse_levelorder_traversal_on_binary_search_tree(
     bst: BinarySearchTree[int],
 ) -> None:
-    expected_result: Iterator[int] = iter((1, 2, 0))
+    expected_result: Iterator[int] = iter(REVERSE_LEVELORDER)
     result: List[int] = levelorder(bst, reverse=True)
 
     result.to_first()
