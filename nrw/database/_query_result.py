@@ -47,7 +47,6 @@ class QueryResult:
     def column_types(self) -> tuple[type | str | None, ...]:
         """Die Anfrage liefert (wenn möglich) die Typenbezeichnung der Spalten der
         Ergebnistabelle als `tuple` vom jeweiligen Typ zurück.
-        Die Bezeichnungen entsprechen den Angaben in der `MySQL`-Datenbank.
         """
         return self._column_types
 
