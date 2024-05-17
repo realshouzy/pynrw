@@ -215,9 +215,9 @@ class Server(ABC):
 
     __slots__: Final[tuple[str, str, str, str]] = (
         "__weakref__",
-        "_connection_handler",
-        "_message_handlers",
         "_lock",
+        "_message_handlers",
+        "_connection_handler",
     )
 
     def __init__(self, port: int) -> None:
@@ -228,12 +228,12 @@ class Server(ABC):
         weil die Portnummer bereits belegt ist), ist keine Verbindungsaufnahme zum
         Server und kein Datenaustausch möglich.
         """
+        self._lock: threading.Lock = threading.Lock()
+        self._message_handlers: List[_ClientMessageHandler] = List()
         self._connection_handler: _NewConnectionHandler = _NewConnectionHandler(
             port,
             self,
         )
-        self._message_handlers: List[_ClientMessageHandler] = List()
-        self._lock: threading.Lock = threading.Lock()
 
     def _add_new_client_message_handler(self, client_socket: socket.socket) -> None:
         with self._lock:
