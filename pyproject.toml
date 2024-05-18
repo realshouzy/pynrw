@@ -33,6 +33,9 @@ classifiers = [
 requires-python = ">=3.8"
 dynamic = ["version", "dependencies"]
 
+[project.urls]
+Source = "https://github.com/realshouzy/pynrw"
+
 [tool.setuptools]
 license-files = ["LICENSE"]
 platforms = ["any"]
