@@ -109,7 +109,7 @@ class DatabaseConnector:
     @property
     def error_message(self) -> str | None:
         """Die Anfrage liefert `None` oder eine Fehlermeldung, die sich jeweils auf die
-        letzte zuvor ausgefuehrte Datenbankoperation bezieht.
+        letzte zuvor ausgeführte Datenbankoperation bezieht.
         """
         return self._message
 

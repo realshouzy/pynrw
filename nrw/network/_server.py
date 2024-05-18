@@ -1,3 +1,5 @@
+"""Klasse `Server`."""
+
 from __future__ import annotations
 
 __all__: Final[list[str]] = ["Server"]
