@@ -13,7 +13,7 @@
 [![Style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![Imports: isort](https://img.shields.io/badge/%20imports-isort-%231674b1?style=flat&labelColor=ef8336)](https://pycqa.github.io/isort/)
 
-This package implements the datastructures and database classes given by the German state NRW in Python, thus futher documentation will be in German. This code is purely intended for educational purposes and should not be used in production!
+This package implements the datastructures, database and network classes given by the German state NRW in Python, thus futher documentation will be in German. This code is purely intended for educational purposes and should not be used in production!
 
 **Dieses Package dient alleine zu Bildungszwecken und sollte nicht in Produktion genutzt werden!**
 
