@@ -36,18 +36,19 @@ class _NewConnectionHandler(threading.Thread):
             server,
             self._on_server_shutdown,
         )
-        self._active: bool = False
-        self._server_socket: socket.socket | None = None
-        with suppress(Exception):
-            self._server_socket = socket.socket(
+        try:
+            self._server_socket: socket.socket | None = socket.socket(
                 socket.AF_INET,
                 socket.SOCK_STREAM,
             )
             self._server_socket.bind(("127.0.0.1", port))
             self._server_socket.listen()
             self._server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-            self._active = True
+            self._active: bool = True
             self.start()
+        except Exception:  # pylint: disable=W0718
+            self._active = False
+            self._server_socket = None
 
     def _on_server_shutdown(
         self,
@@ -58,22 +59,16 @@ class _NewConnectionHandler(threading.Thread):
     @override
     def run(self) -> None:
         while self._active:
-            with suppress(OSError):
-                try:
-                    client_socket, (client_ip, client_port) = (
-                        self._server_socket.accept()
-                    )
-                    self._server._add_new_client_message_handler(client_socket)
-                    self._server.process_new_connection(client_ip, client_port)
-                except ReferenceError:
-                    self.close()
+            with suppress(OSError, ReferenceError):
+                client_socket, (client_ip, client_port) = self._server_socket.accept()
+                self._server._add_new_client_message_handler(client_socket)
+                self._server.process_new_connection(client_ip, client_port)
 
     def close(self) -> None:
-        if self._active:
-            self._active = False
-            if self._server_socket is not None:
-                with suppress(OSError):
-                    self._server_socket.close()
+        self._active = False
+        if self._server_socket is not None:
+            with suppress(OSError):
+                self._server_socket.close()
 
 
 class _ClientSocketWrapper:
@@ -167,7 +162,7 @@ class _ClientMessageHandler(threading.Thread):
             message = self._socket_wrapper.receive()
             client_ip: str | None = self._socket_wrapper.client_ip
             client_port: int = self._socket_wrapper.client_port
-            try:
+            with suppress(ReferenceError):
                 if message is not None:
                     self._server.process_message(client_ip, client_port, message)
                 else:
@@ -181,8 +176,6 @@ class _ClientMessageHandler(threading.Thread):
                         message_handler.close()
                         self._server._remove_client_message_handler(message_handler)
                         self._server.process_closing_connection(client_ip, client_port)
-            except ReferenceError:
-                self.close()
 
     def send(self, message: str) -> None:
         if self._active:
@@ -285,7 +278,10 @@ class Server(ABC):
         `client_ip` und `client_port` spezifizierten Client aktuell verbunden ist.
         Ansonsten liefert die Methode den Wert `False`.
         """
-        return self._find_client_message_handler(client_ip, client_port) is not None
+        message_handler: _ClientMessageHandler | None = (
+            self._find_client_message_handler(client_ip, client_port)
+        )
+        return message_handler is not None and message_handler._active
 
     def send(self, client_ip: str, client_port: int, message: str) -> None:
         """Die Nachricht `message` wird - um einen Zeilentrenner erweitert - an den
@@ -341,8 +337,8 @@ class Server(ABC):
                     message_handler.client_ip,
                     message_handler.client_port,
                 )
+                message_handler.close()
                 self._message_handlers.remove()
-                self._message_handlers.next()
 
     @abstractmethod
     def process_new_connection(
