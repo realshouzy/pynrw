@@ -240,7 +240,7 @@ class List(Generic[_T]):
         is None`, `node` nicht in der Liste oder `node` der erste Knoten der Liste,
         wird `None` zurückgegeben.
         """
-        if node is None or node == self._first or self.is_empty:
+        if node is None or node is self._first or self.is_empty:
             return None
 
         temp: _ListNode[_T] | None = self._first

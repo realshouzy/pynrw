@@ -47,7 +47,7 @@ class DatabaseConnector:
         self._message: str | None = None
 
         try:
-            self._connection = pyodbc.connect(
+            self._connection: pyodbc.Connection | None = pyodbc.connect(
                 f"Driver={{Microsoft Access Driver (*.mdb, *.accdb)}};DBQ={database};",
                 autocommit=True,
             )
