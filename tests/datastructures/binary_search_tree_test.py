@@ -72,7 +72,7 @@ def test_str_of_binary_tree() -> None:
     tree.insert(2)
     tree.insert(-1)
     tree.insert(3)
-    assert str(tree) == "   1  \n  / \\ \n  0 2 \n /   \\\n-1   3"
+    assert str(tree) == "     1    \n    / \\   \n  _0   2  \n /      \\ \n-1       3"
 
 
 def test_repr_of_bst() -> None:

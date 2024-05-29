@@ -21,7 +21,7 @@ def test_str_of_btnode() -> None:
     assert str(btnode) == "1"
     btnode._left = BinaryTree(0)  # type: ignore[assignment]
     btnode._right = BinaryTree(2)  # type: ignore[assignment]
-    assert str(btnode) == " 1 \n/ \\\n0 2"
+    assert str(btnode) == "  1  \n / \\ \n0   2"
 
 
 def test_repr_of_btnode() -> None:
@@ -88,7 +88,7 @@ def test_str_of_binary_tree() -> None:
     tree.content = 1
     tree.left_tree = BinaryTree(0)
     tree.right_tree = BinaryTree(2)
-    assert str(tree) == " 1 \n/ \\\n0 2"
+    assert str(tree) == "  1  \n / \\ \n0   2"
 
 
 def test_binary_tree_construction_with_no_params_and_getters() -> None:

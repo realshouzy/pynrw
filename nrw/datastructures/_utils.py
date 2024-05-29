@@ -14,76 +14,60 @@ _T = TypeVar("_T")
 
 def display_binary_node(node: _BTNode[_T] | _BSTNode[ComparableContentT]) -> str:
     lines, *_ = _display_binary_node_impl(node)
-    return "\n".join(lines)
+    return "\n".join(lines[:-1])
 
 
 def _display_binary_node_impl(  # pylint: disable=R0914
-    node: _BTNode[_T] | _BSTNode[ComparableContentT],
+    node: _BTNode[_T] | _BSTNode[ComparableContentT] | None,
 ) -> tuple[list[str], int, int, int]:
-    """Based on the implementation by J.V.
+    """Inspired by joowani.
 
-    https://stackoverflow.com/questions/34012886/print-binary-tree-level-by-level-in-python/54074933#54074933
+    https://github.com/joowani/binarytree/blob/74e0c0bf204a0a2789c45a07264718f963db37fe/binarytree/__init__.py#L1891-L1981
     """
-    if (node._right is None or node._right.is_empty) and (
-        node._left is None or node._left.is_empty
-    ):
-        line: str = str(node._content)
-        width: int = len(line)
-        height: int = 1
-        middle: int = width // 2
-        return [line], width, height, middle
+    if node is None:
+        return [], 0, 0, 0
 
-    content: str
-    content_len: int
-    first_line: str
-    second_line: str
-    shifted_lines: list[str]
-    if (node._right is None or node._right.is_empty) and not node._left.is_empty:
-        assert node._left._node is not None
-        lines, n, p, x = _display_binary_node_impl(node._left._node)
-        content = str(node._content)
-        content_len = len(content)
-        first_line = (x + 1) * " " + (n - x - 1) * "_" + content
-        second_line = x * " " + "/" + (n - x - 1 + content_len) * " "
-        shifted_lines = [line + content_len * " " for line in lines]
-        return (
-            [first_line, second_line, *shifted_lines],
-            n + content_len,
-            p + 2,
-            n + content_len // 2,
-        )
+    line1: list[str] = []
+    line2: list[str] = []
+    node_repr: str = str(node._content)
 
-    if (node._left is None or node._left.is_empty) and not node._right.is_empty:
-        assert node._right._node is not None
-        lines, n, p, x = _display_binary_node_impl(node._right._node)
-        content = str(node._content)
-        content_len = len(content)
-        first_line = content + x * "_" + (n - x) * " "
-        second_line = (content_len + x) * " " + "\\" + (n - x - 1) * " "
-        shifted_lines = [content_len * " " + line for line in lines]
-        return (
-            [first_line, second_line, *shifted_lines],
-            n + content_len,
-            p + 2,
-            content_len // 2,
-        )
+    new_root_width = gap_size = len(node_repr)
 
-    assert node._left._node is not None
-    assert node._right._node is not None
-    left, n, p, x = _display_binary_node_impl(node._left._node)
-    right, m, q, y = _display_binary_node_impl(node._right._node)
-    content = str(node._content)
-    content_len = len(content)
-    first_line = (x + 1) * " " + (n - x - 1) * "_" + content + y * "_" + (m - y) * " "
-    second_line = (
-        x * " " + "/" + (n - x - 1 + content_len + y) * " " + "\\" + (m - y - 1) * " "
+    l_box, l_box_width, l_root_start, l_root_end = _display_binary_node_impl(
+        node._left._node,
     )
-    if p < q:  # pragma: no cover
-        left += [n * " "] * (q - p)
-    elif q < p:  # pragma: no cover
-        right += [m * " "] * (p - q)
-    zipped_lines = zip(left, right)
-    lines = [first_line, second_line] + [
-        a + content_len * " " + b for a, b in zipped_lines
-    ]
-    return lines, n + m + content_len, max(p, q) + 2, n + content_len // 2
+    r_box, r_box_width, r_root_start, r_root_end = _display_binary_node_impl(
+        node._right._node,
+    )
+
+    if l_box_width > 0:
+        l_root: int = (l_root_start + l_root_end) // 2 + 1
+        line1.append(" " * (l_root + 1))
+        line1.append("_" * (l_box_width - l_root))
+        line2.append(" " * l_root + "/")
+        line2.append(" " * (l_box_width - l_root))
+        new_root_start: int = l_box_width + 1
+        gap_size += 1
+    else:
+        new_root_start = 0
+
+    line1.append(node_repr)
+    line2.append(" " * new_root_width)
+
+    if r_box_width > 0:
+        r_root: int = (r_root_start + r_root_end) // 2
+        line1.append("_" * r_root)
+        line1.append(" " * (r_box_width - r_root + 1))
+        line2.append(" " * r_root + "\\")
+        line2.append(" " * (r_box_width - r_root))
+        gap_size += 1
+    new_root_end: int = new_root_start + new_root_width - 1
+
+    gap: str = " " * gap_size
+    new_box: list[str] = ["".join(line1), "".join(line2)]
+    for i in range(max(len(l_box), len(r_box))):
+        l_line: str = l_box[i] if i < len(l_box) else " " * l_box_width
+        r_line: str = r_box[i] if i < len(r_box) else " " * r_box_width
+        new_box.append(l_line + gap + r_line)
+
+    return new_box, len(new_box[0]), new_root_start, new_root_end
