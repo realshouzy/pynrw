@@ -7,11 +7,9 @@ __all__: Final[list[str]] = [
     "inorder",
     "postorder",
     "levelorder",
-    "reverse_inorder",
 ]
 
 from typing import Final, TypeVar
-from warnings import warn
 
 from nrw.datastructures import BinarySearchTree, BinaryTree, ComparableContentT, List
 
@@ -60,13 +58,6 @@ def inorder(
         result.concat(inorder(tree.left_tree, reverse=reverse))
 
     return result
-
-
-def reverse_inorder(
-    tree: BinaryTree[_T] | BinarySearchTree[ComparableContentT],
-) -> List[_T | ComparableContentT]:  # pragma: no cover
-    warn("Use 'inorder(..., reverse=True)'", DeprecationWarning, stacklevel=2)
-    return inorder(tree, reverse=True)
 
 
 def postorder(

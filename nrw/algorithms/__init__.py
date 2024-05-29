@@ -15,7 +15,6 @@ __all__: Final[list[str]] = [
     "inorder",
     "postorder",
     "levelorder",
-    "reverse_inorder",
 ]
 
 from typing import Final
@@ -37,5 +36,4 @@ from nrw.algorithms._traversal import (
     levelorder,
     postorder,
     preorder,
-    reverse_inorder,
 )
