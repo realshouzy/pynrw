@@ -83,13 +83,13 @@ bst.insert(0)
 bst.insert(1)
 bst.insert(4)
 print(bst)
-#    _4_
-#   /   \
-#  _2   6
-# /  \ /
-# 0  3 5
+#       3__
+#      /   \
+#   __2     5
+#  /       /
+# 0       4
 #  \
-#  1
+#   1
 ```
 
 Des weiteren sind (triviale) Optimierungen vorgenommen worden:
