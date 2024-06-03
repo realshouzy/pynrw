@@ -1,5 +1,5 @@
 ci:
-  autoupdate_schedule: weekly
+  autoupdate_schedule: monthly
   skip: [pylint]
 
 repos:
