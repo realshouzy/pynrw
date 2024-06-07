@@ -37,11 +37,9 @@ dynamic = ["version", "dependencies"]
 Source = "https://github.com/realshouzy/pynrw"
 
 [tool.setuptools]
+packages = ["nrw"]
 license-files = ["LICENSE"]
 platforms = ["any"]
-
-[tool.setuptools.package-data]
-datastructures = ["py.typed", "*.pyi"]
 
 [tool.setuptools.dynamic]
 version = { attr = "nrw.__version__" }
