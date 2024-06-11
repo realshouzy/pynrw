@@ -5,6 +5,7 @@ from __future__ import annotations
 __all__: Final[list[str]] = ["DatabaseConnector"]
 
 import sqlite3
+from contextlib import closing
 from typing import Final
 
 from nrw.database._query_result import QueryResult
@@ -69,31 +70,24 @@ class DatabaseConnector:
             return
 
         try:
-            cursor: sqlite3.Cursor = self._connection.cursor()
+            with closing(self._connection.cursor()) as cursor:
+                if cursor.execute(sql_statement) is not None and (
+                    data := cursor.fetchall()
+                ):
+                    assert cursor.description is not None, "No description"
+                    column_names: tuple[str, ...] = tuple(
+                        column[0] for column in cursor.description
+                    )
+                    colum_types: tuple[None, ...] = tuple(
+                        column[1] for column in cursor.description
+                    )
+                    self._current_query_result = QueryResult(
+                        data,
+                        column_names,
+                        colum_types,
+                    )
         except Exception as exception:
             self._message = str(exception)
-            return
-
-        try:
-            if cursor.execute(sql_statement) is not None and (
-                data := cursor.fetchall()
-            ):
-                assert cursor.description is not None, "No description"
-                column_names: tuple[str, ...] = tuple(
-                    column[0] for column in cursor.description
-                )
-                colum_types: tuple[None, ...] = tuple(
-                    column[1] for column in cursor.description
-                )
-                self._current_query_result = QueryResult(
-                    data,
-                    column_names,
-                    colum_types,
-                )
-        except Exception as exception:
-            self._message = str(exception)
-        finally:
-            cursor.close()
 
     @property
     def current_query_result(self) -> QueryResult | None:
