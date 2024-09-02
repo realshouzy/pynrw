@@ -7,7 +7,7 @@ import pytest
 from nrw.datastructures import Edge, Vertex
 
 
-@pytest.fixture()
+@pytest.fixture
 def sample_edge() -> Edge:
     vertex_a: Vertex = Vertex("A")
     vertex_b: Vertex = Vertex("B")

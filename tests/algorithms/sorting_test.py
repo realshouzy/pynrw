@@ -16,12 +16,12 @@ from nrw.algorithms import (
 from nrw.datastructures import ComparableContentT, List
 
 
-@pytest.fixture()
+@pytest.fixture
 def empty_list() -> List[int]:
     return List()
 
 
-@pytest.fixture()
+@pytest.fixture
 def sorted_list() -> List[int]:
     lst: List[int] = List()
     lst.append(1)
@@ -33,7 +33,7 @@ def sorted_list() -> List[int]:
     return lst
 
 
-@pytest.fixture()
+@pytest.fixture
 def unsorted_list() -> List[int]:
     lst: List[int] = List()
     lst.append(3)

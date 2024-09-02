@@ -8,17 +8,17 @@ from nrw.datastructures import List
 from nrw.datastructures._list import _ListNode
 
 
-@pytest.fixture()
+@pytest.fixture
 def sample_node() -> _ListNode[int]:
     return _ListNode(1)
 
 
-@pytest.fixture()
+@pytest.fixture
 def empty_list() -> List[int]:
     return List()
 
 
-@pytest.fixture()
+@pytest.fixture
 def sample_list() -> List[int]:
     lst: List[int] = List()
     lst.append(1)
