@@ -13,7 +13,7 @@ if TYPE_CHECKING:
     from nrw.datastructures import List
 
 
-@pytest.fixture()
+@pytest.fixture
 def bst() -> BinarySearchTree[int]:
     tree: BinarySearchTree[int] = BinarySearchTree()
     tree.insert(5)
@@ -25,7 +25,7 @@ def bst() -> BinarySearchTree[int]:
     return tree
 
 
-@pytest.fixture()
+@pytest.fixture
 def binary_tree() -> BinaryTree[int]:
     tree: BinaryTree[int] = BinaryTree()
     tree.content = 5

@@ -18,7 +18,7 @@ if TYPE_CHECKING:
     from pathlib import Path
 
 
-@pytest.fixture()
+@pytest.fixture
 def msaccess_db(tmp_path: Path) -> Iterator[str]:
     test_db: Path = tmp_path / "test.accdb"
     test_db.touch()

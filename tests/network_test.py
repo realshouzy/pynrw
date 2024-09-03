@@ -57,7 +57,7 @@ class HelloClient(Client):
         assert message == "Hello to you"
 
 
-@pytest.mark.networktest()
+@pytest.mark.networktest
 def test_connection_without_running_server() -> None:
     conn: Connection = Connection(LOCALHOST, random_port())
     conn.send("Hello")
@@ -65,7 +65,7 @@ def test_connection_without_running_server() -> None:
     conn.close()
 
 
-@pytest.mark.networktest()
+@pytest.mark.networktest
 def test_client_without_running_server() -> None:
     client: HelloClient = HelloClient(LOCALHOST, random_port())
     assert not client.is_connected
@@ -74,7 +74,7 @@ def test_client_without_running_server() -> None:
     assert not client.is_connected
 
 
-@pytest.mark.networktest()
+@pytest.mark.networktest
 def test_close_connection_first() -> None:
     port: int = random_port()
     server: HelloServer = HelloServer(port=port)
@@ -92,7 +92,7 @@ def test_close_connection_first() -> None:
     assert not server.is_open
 
 
-@pytest.mark.networktest()
+@pytest.mark.networktest
 def test_close_server_first() -> None:
     port: int = random_port()
     server: HelloServer = HelloServer(port=port)
@@ -110,7 +110,7 @@ def test_close_server_first() -> None:
     assert not server.is_open
 
 
-@pytest.mark.networktest()
+@pytest.mark.networktest
 def test_close_client_connection_first() -> None:
     port: int = random_port()
     server: HelloServer = HelloServer(port)
@@ -140,7 +140,7 @@ def test_close_client_connection_first() -> None:
     assert not client.is_connected
 
 
-@pytest.mark.networktest()
+@pytest.mark.networktest
 def test_close_server_connection_first() -> None:
     port: int = random_port()
     server: HelloServer = HelloServer(port)
@@ -171,7 +171,7 @@ def test_close_server_connection_first() -> None:
     assert not client.is_connected
 
 
-@pytest.mark.networktest()
+@pytest.mark.networktest
 def test_server_with_two_connected_clients() -> None:
     port: int = random_port()
     server: HelloServer = HelloServer(port)

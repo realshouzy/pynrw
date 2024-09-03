@@ -7,7 +7,7 @@ import pytest
 from nrw.datastructures import Edge, Graph, List, Vertex
 
 
-@pytest.fixture()
+@pytest.fixture
 def graph() -> Graph:
     return Graph()
 

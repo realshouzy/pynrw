@@ -8,12 +8,12 @@ from nrw.datastructures import BinarySearchTree
 from nrw.datastructures._binary_search_tree import _BSTNode
 
 
-@pytest.fixture()
+@pytest.fixture
 def empty_bst() -> BinarySearchTree[int]:
     return BinarySearchTree()
 
 
-@pytest.fixture()
+@pytest.fixture
 def sample_bst() -> BinarySearchTree[int]:
     bst: BinarySearchTree[int] = BinarySearchTree()
     bst._node = _BSTNode(1)
