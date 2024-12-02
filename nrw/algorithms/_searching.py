@@ -3,9 +3,9 @@
 from __future__ import annotations
 
 __all__: Final[list[str]] = [
-    "linear_search",
-    "depth_first_search",
     "breadth_first_search",
+    "depth_first_search",
+    "linear_search",
 ]
 
 from typing import TYPE_CHECKING, Final, TypeVar

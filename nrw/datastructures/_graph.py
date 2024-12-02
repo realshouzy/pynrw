@@ -27,7 +27,7 @@ class Graph:
     Knotenobjekt zu einer bestimmten ID gehört und ob der Graph leer ist.
     """
 
-    __slots__: Final[tuple[str, str]] = ("_vertices", "_edges")
+    __slots__: Final[tuple[str, str]] = ("_edges", "_vertices")
     __hash__ = None  # type: ignore[assignment]
 
     def __init__(self) -> None:

@@ -1,18 +1,18 @@
 # pylint: skip-file
-__all__: Final[list[str]] = ["Connection", "Client", "Server"]
+__all__: Final[list[str]] = ["Client", "Connection", "Server"]
 
 from abc import ABC, abstractmethod
 from typing import Final
 
 class Connection:
-    __slots__: Final[tuple[str, str, str]] = ("_socket", "_to_server", "_from_server")
+    __slots__: Final[tuple[str, str, str]] = ("_from_server", "_socket", "_to_server")
     def __init__(self, server_ip: str, server_port: int) -> None: ...
     def receive(self) -> str | None: ...
     def send(self, message: str) -> None: ...
     def close(self) -> None: ...
 
 class Client(ABC):
-    __slots__: Final[tuple[str, str]] = ("_socket_wrapper", "_active")
+    __slots__: Final[tuple[str, str]] = ("_active", "_socket_wrapper")
     def __init__(self, server_ip: str, server_port: int) -> None: ...
     @property
     def is_connected(self) -> bool: ...
@@ -25,8 +25,8 @@ class Server(ABC):
     __slots__: Final[tuple[str, str, str, str]] = (
         "__weakref__",
         "_connection_handler",
-        "_message_handlers",
         "_lock",
+        "_message_handlers",
     )
     def __init__(self, port: int) -> None: ...
     @property

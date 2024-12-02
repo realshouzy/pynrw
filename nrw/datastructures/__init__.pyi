@@ -1,15 +1,15 @@
 # pylint: skip-file
 __all__: Final[list[str]] = [
-    "Stack",
-    "Queue",
-    "List",
+    "BinarySearchTree",
     "BinaryTree",
     "ComparableContent",
     "ComparableContentT",
-    "Vertex",
     "Edge",
-    "BinarySearchTree",
     "Graph",
+    "List",
+    "Queue",
+    "Stack",
+    "Vertex",
 ]
 
 from typing import Final, Generic, TypeVar, overload
@@ -43,7 +43,7 @@ class Stack(Generic[_T]):
     def top(self) -> _T | None: ...
 
 class List(Generic[_T]):
-    __slots__: Final[tuple[str, str, str]] = ("_first", "_last", "_current")
+    __slots__: Final[tuple[str, str, str]] = ("_current", "_first", "_last")
     __hash__ = None  # type: ignore[assignment]
 
     def __init__(self) -> None: ...
@@ -131,7 +131,7 @@ class Vertex:
     def is_marked(self) -> bool: ...
 
 class Edge:
-    __slots__: Final[tuple[str, str, str]] = ("_vertices", "_weight", "_mark")
+    __slots__: Final[tuple[str, str, str]] = ("_mark", "_vertices", "_weight")
     __hash__ = None  # type: ignore[assignment]
 
     def __init__(self, vertex: Vertex, another_vertex: Vertex, weight: int) -> None: ...
@@ -149,7 +149,7 @@ class Edge:
     def is_marked(self) -> bool: ...
 
 class Graph:
-    __slots__: Final[tuple[str, str]] = ("_vertices", "_edges")
+    __slots__: Final[tuple[str, str]] = ("_edges", "_vertices")
     __hash__ = None  # type: ignore[assignment]
 
     def __init__(self) -> None: ...

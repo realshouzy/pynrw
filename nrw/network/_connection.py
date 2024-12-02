@@ -24,7 +24,7 @@ class Connection:
     reaktiviert werden.
     """
 
-    __slots__: Final[tuple[str, str, str]] = ("_socket", "_to_server", "_from_server")
+    __slots__: Final[tuple[str, str, str]] = ("_from_server", "_socket", "_to_server")
 
     def __init__(self, server_ip: str, server_port: int) -> None:
         """Ein Objekt vom Typ `Connection` wird erstellt. Dadurch wird eine Verbindung

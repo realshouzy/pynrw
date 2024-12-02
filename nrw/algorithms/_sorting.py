@@ -4,10 +4,10 @@ from __future__ import annotations
 
 __all__: Final[list[str]] = [
     "bubble_sort",
-    "selection_sort",
     "insertion_sort",
     "merge_sort",
     "quick_sort",
+    "selection_sort",
 ]
 
 from typing import TYPE_CHECKING, Final

@@ -24,7 +24,7 @@ if TYPE_CHECKING:
 
 
 class _NewConnectionHandler(threading.Thread):
-    __slots__: Final[tuple[str, str, str]] = ("_server", "_active", "_server_socket")
+    __slots__: Final[tuple[str, str, str]] = ("_active", "_server", "_server_socket")
 
     def __init__(
         self,
@@ -74,8 +74,8 @@ class _NewConnectionHandler(threading.Thread):
 class _ClientSocketWrapper:
     __slots__: Final[tuple[str, str, str]] = (
         "_client_socket",
-        "_to_client",
         "_from_client",
+        "_to_client",
     )
 
     def __init__(self, client_socket: socket.socket | None) -> None:
@@ -135,7 +135,7 @@ class _ClientSocketWrapper:
 
 
 class _ClientMessageHandler(threading.Thread):
-    __slots__: Final[tuple[str, str, str]] = ("_server", "_active", "_socket_wrapper")
+    __slots__: Final[tuple[str, str, str]] = ("_active", "_server", "_socket_wrapper")
 
     def __init__(self, client_socket: socket.socket | None, server: Server) -> None:
         super().__init__()
@@ -210,9 +210,9 @@ class Server(ABC):
 
     __slots__: Final[tuple[str, str, str, str]] = (
         "__weakref__",
+        "_connection_handler",
         "_lock",
         "_message_handlers",
-        "_connection_handler",
     )
 
     def __init__(self, port: int) -> None:

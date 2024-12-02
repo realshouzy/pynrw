@@ -3,16 +3,16 @@
 from __future__ import annotations
 
 __all__: Final[list[str]] = [
-    "Stack",
-    "Queue",
-    "List",
+    "BinarySearchTree",
     "BinaryTree",
     "ComparableContent",
     "ComparableContentT",
-    "Vertex",
     "Edge",
-    "BinarySearchTree",
     "Graph",
+    "List",
+    "Queue",
+    "Stack",
+    "Vertex",
 ]
 
 
