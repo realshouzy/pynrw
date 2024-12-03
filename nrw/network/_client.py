@@ -15,7 +15,7 @@ if TYPE_CHECKING:
 
 
 class _SocketWrapper:
-    __slots__: Final[tuple[str, str, str]] = ("_socket", "_to_server", "_from_server")
+    __slots__: Final[tuple[str, str, str]] = ("_from_server", "_socket", "_to_server")
 
     def __init__(self, server_ip: str, server_port: int) -> None:
         try:
@@ -73,7 +73,7 @@ class Client(ABC):
     Eine einmal unterbrochene oder getrennte Verbindung kann nicht reaktiviert werden.
     """
 
-    __slots__: Final[tuple[str, str]] = ("_socket_wrapper", "_active")
+    __slots__: Final[tuple[str, str]] = ("_active", "_socket_wrapper")
 
     def __init__(self, server_ip: str, server_port: int) -> None:
         """Es wird eine Verbindung zum durch `server_ip` und `server_port`

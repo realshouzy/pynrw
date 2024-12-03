@@ -1,17 +1,17 @@
 # pylint: skip-file
 __all__: Final[list[str]] = [
-    "linear_search",
-    "depth_first_search",
     "breadth_first_search",
     "bubble_sort",
-    "selection_sort",
-    "insertion_sort",
-    "merge_sort",
-    "quick_sort",
-    "preorder",
+    "depth_first_search",
     "inorder",
-    "postorder",
+    "insertion_sort",
     "levelorder",
+    "linear_search",
+    "merge_sort",
+    "postorder",
+    "preorder",
+    "quick_sort",
+    "selection_sort",
 ]
 
 from typing import Final, TypeVar, overload

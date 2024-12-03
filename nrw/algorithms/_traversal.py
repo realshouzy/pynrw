@@ -3,10 +3,10 @@
 from __future__ import annotations
 
 __all__: Final[list[str]] = [
-    "preorder",
     "inorder",
-    "postorder",
     "levelorder",
+    "postorder",
+    "preorder",
 ]
 
 from typing import Final, TypeVar

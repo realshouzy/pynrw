@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-__all__: Final[list[str]] = ["Connection", "Client", "Server"]
+__all__: Final[list[str]] = ["Client", "Connection", "Server"]
 
 from typing import Final
 

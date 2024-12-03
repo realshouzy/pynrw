@@ -18,7 +18,7 @@ class Edge:
     und eine Markierung gesetzt und abgefragt werden.
     """
 
-    __slots__: Final[tuple[str, str, str]] = ("_vertices", "_weight", "_mark")
+    __slots__: Final[tuple[str, str, str]] = ("_mark", "_vertices", "_weight")
     __hash__ = None  # type: ignore[assignment]
 
     def __init__(self, vertex: Vertex, another_vertex: Vertex, weight: int) -> None:

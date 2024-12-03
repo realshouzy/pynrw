@@ -61,7 +61,7 @@ class List(Generic[_T]):
     kann vor dem aktuellen Objekt ein Listenobjekt eingefügt werden.
     """
 
-    __slots__: Final[tuple[str, str, str]] = ("_first", "_last", "_current")
+    __slots__: Final[tuple[str, str, str]] = ("_current", "_first", "_last")
     __hash__ = None  # type: ignore[assignment]
 
     def __init__(self) -> None:

@@ -15,7 +15,7 @@ class QueryResult:
     Die Klasse verfügt über keinen öffentlichen Konstruktor.
     """
 
-    __slots__: Final[tuple[str, str, str]] = ("_data", "_column_names", "_column_types")
+    __slots__: Final[tuple[str, str, str]] = ("_column_names", "_column_types", "_data")
 
     def __init__(
         self,
