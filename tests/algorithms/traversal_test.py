@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Tests for `datastructures._traversal`."""
+
 from __future__ import annotations
 
 from typing import TYPE_CHECKING, Final, Iterator, Protocol
