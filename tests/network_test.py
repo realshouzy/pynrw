@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Tests for `network`."""
+
 from __future__ import annotations
 
 import random
