@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Tests for `database.msaccess`."""
+
 from __future__ import annotations
 
 from typing import TYPE_CHECKING, Iterator

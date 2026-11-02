@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Tests for `database.sqlite`."""
+
 from __future__ import annotations
 
 import pytest

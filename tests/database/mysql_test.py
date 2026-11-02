@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Tests for `database.mysql`."""
+
 from __future__ import annotations
 
 import pytest
