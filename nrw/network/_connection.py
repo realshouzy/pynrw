@@ -62,7 +62,7 @@ class Connection:
         if self._from_server is not None:
             with suppress(OSError, ValueError):
                 received_line: str = self._from_server.readline().strip()
-                return received_line if received_line else None
+                return received_line or None
         return None
 
     def send(self, message: str) -> None:

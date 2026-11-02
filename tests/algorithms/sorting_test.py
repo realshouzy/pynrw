@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Tests for `datastructures._sorting`."""
+
 from __future__ import annotations
 
 from typing import Callable

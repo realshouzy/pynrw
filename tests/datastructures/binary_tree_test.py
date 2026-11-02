@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Tests for `datastructures._binary_tree`."""
+
 from __future__ import annotations
 
 import pytest
